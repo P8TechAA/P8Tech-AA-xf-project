@@ -1,0 +1,41 @@
+{
+  "xfdatas": [
+    {
+      "code": 0,
+      "data": {
+        "cdn": "",
+        "backend": "",
+        "memberName": "sdasd",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1wiczNcIjpcImZyYW5rMVwiLFwiczRcIjpcIlVOS05PV1wiLFwiczVcIjpcInJlc3Quc2VydmVyLWQ3MDcxNDIxLTg2ZDMtNDdjMi05NDYwLTJmZWEzMDc1Mzg5YVwiLFwiczZcIjpcIjE1Mi4zMi4xMTAuMjI2XCIsXCJzMVwiOjQwLFwiczJcIjoxNTkwNzQyOTE0MTQ3fSIsImV4cCI6MTU5MDc1NzMxNH0.OYepMujMPcKcmgaRCDMZK98VVEaTKAOea5HViKb1IcQ",
+        "loginName": "frank1",
+        "password": "200820E3227815ED1756A6B531E7E0D2",
+        "domain": "http://t201.xdy20.com",
+        "cashierDomain": "http://t201.xdy20.com",
+        "vip": {
+          "id": 4,
+          "createTime": 1434958162000,
+          "vipLevel": 4,
+          "vipName": "白银Ⅱ",
+          "levupCredit": 0,
+          "credit": 0,
+          "vipLev": null,
+          "status": 0,
+          "exclusiveUrl": "www.xf985.com",
+          "exclusiveWapUrl": "http://t201.xdy20.com",
+          "exclusiveAppUrl": "http://t201.xdy20.com",
+          "exclusiveAppCashierUrl": "http://t201.xdy20.com"
+        },
+        "evip": {
+          "id": 4,
+          "exclusiveLev": 4,
+          "exclusiveName": "VIP4",
+          "depMul": 13,
+          "bonuMul": 13,
+          "depMin": null,
+          "depMax": null
+        },
+        "balance": 11401.9300
+      }
+    }
+  ]
+}

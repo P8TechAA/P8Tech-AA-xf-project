@@ -1,0 +1,606 @@
+<template>
+  <div class="vip-main-container">
+
+    <div class="vip-scrollable-container">
+
+
+
+      <div class="vip-top-container">
+        <div class="vip-top-top">
+            <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
+            <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+        </div>
+
+        <swiper class="swiper" :options="swiperOption">
+          <swiper-slide>
+              <img src="../../assets/images/vip/vip-card-img.png" alt="" width="100%" height="100%">
+              <div class="vip-card-text">
+                <span class="vip-text-top">>存款量少20元可申请一次</span>
+                <span class="vip-text-mid">>晋级奖金18888元</span>
+                <span class="vip-text-bottom">立即申请</span>
+              </div>
+          </swiper-slide>
+          <swiper-slide class="vip-swiper-image">
+            <img src="../../assets/images/vip/vip-card-img.png" alt="" width="100%" height="100%">
+            <div class="vip-card-text">
+              <span class="vip-text-top">>存款量少20元可申请一次</span>
+              <span class="vip-text-mid">>晋级奖金18888元</span>
+              <span class="vip-text-bottom">立即申请</span>
+            </div>
+          </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
+
+        <div class="progress-bar-percentage">
+          {{progressBarPercentage}}%
+        </div>
+
+        <div class="progress-bar-bar">
+          <div class="progress-label-vip1">
+            VIP1
+          </div>
+          <div class="progress-percentage-container">
+            <div class="progress-bar-progress-indicator" :style="{width:progressBarPercentage+'%'}"></div>
+          </div>
+          <div class="progress-label-vip2">
+            VIP2
+          </div>
+        </div>
+
+        <div class="progress-description">
+            您已完成{{vipDeposit}}存款和{{vipTurnover}}流水
+        </div>
+      </div>
+
+      <section v-if="step == 'vip1'">
+
+      <div class="vip-privileges">
+        <div class="vip-privileges-mark"></div>
+        <span>VIP特权</span>
+      </div>
+
+      <div class="priviliges-row">
+        <div class="privileges-col1-img">
+          <img src="../../assets/images/vip/monthly-red-envelop.png" alt="" width="100%" height="100%">
+        </div>
+        <span class="privileges-col2-text">每月红包</span>
+        <p class="privileges-col3-text">38<span class="privileges-col3-yuan">元</span></p>
+        <div class="privileges-col4-button">
+          <span>领取</span>
+        </div>
+      </div>
+
+      <div class="priviliges-row">
+        <div class="privileges-col1-img">
+          <img src="../../assets/images/vip/monthly-deposit.png" alt="" width="100%" height="100%">
+        </div>
+        <span class="privileges-col2-text">每月存送</span>
+        <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
+        <div class="privileges-col4-button">
+          <span>领取</span>
+        </div>
+      </div>
+
+      <div class="priviliges-row">
+        <div class="privileges-col1-img">
+          <img src="../../assets/images/vip/birthday-gift.png" alt="" width="100%" height="100%">
+        </div>
+        <span class="privileges-col2-text">生日礼金</span>
+        <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
+        <div class="privileges-col4-button">
+          <span>领取</span>
+        </div>
+      </div>
+
+      <div class="vip-privileges vip-privileges-add-margin">
+        <div class="vip-privileges-mark"></div>
+        <span>VIP特权</span>
+      </div>
+
+      <div class="privileges-data">
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{esportsRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            电竞返水
+          </div>
+        </div>
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{sportsRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            体育返水
+          </div>
+        </div>
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{liveRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            真人返水
+          </div>
+        </div>
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{electronicRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            电子返水
+          </div>
+        </div>
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{fishingBackWatersRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            捕鱼返水
+          </div>
+        </div>
+
+        <div class="priveleges-inner">
+          <div class="priveleges-inner-percentage">
+            {{chessCardRebate}}%
+          </div>
+          <div class="priveleges-inner-label">
+            棋牌返水
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+    <!-- <xf-footer></xf-footer> -->
+
+  </div>
+</template>
+
+
+<script>
+import Footer from '../../components/Footer.vue'
+
+export default {
+  components:{
+      'xf-footer': Footer
+  },
+
+  name: 'VIP',
+    data() {
+      return {
+        vipPrivilegesStatus: true,
+        vipDetailsStatus: false,
+        progressBarPercentage: 60,
+        vipDeposit: 0.00,
+        vipTurnover: 0.00,
+        esportsRebate: 0.4,
+        sportsRebate: 0.4,
+        liveRebate: 0.4,
+        electronicRebate: 0.4,
+        fishingBackWatersRebate: 0.4,
+        chessCardRebate: 0.4,
+        step: 'vip1',
+
+        swiperOption: {
+          loop: true,
+          speed: 1000,
+          autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        },
+      }
+    },
+
+    computed: {
+
+    },
+
+    methods: {
+
+      privilegesTab(){
+        this.step = 'vip1'
+        this.vipPrivilegesStatus = true,
+        this.vipDetailsStatus = false
+      },
+
+      detailsTab(){
+        this.step = 'vip2'
+        this.vipPrivilegesStatus = false,
+        this.vipDetailsStatus = true
+      }
+    },
+
+    mounted() {
+
+    }
+  }
+</script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+
+.vip-main-container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .vip-scrollable-container{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: #131724;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 15vw;
+  }
+
+  .vip-top-container{
+    width: 100%;
+    background-image: url("../../assets/images/vip/vip-background.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 2.5vw 0vw 5vw;
+  }
+
+  .vip-top-top{
+    width: 60vw;
+    margin: 0 auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span{
+      font-family: "Microsoft YaHei";
+    	font-size: 4vw;
+    	font-weight: normal;
+    	font-stretch: normal;
+    	letter-spacing: 0.4vw;
+    	color: #ffffff;
+
+      border-bottom: 1vw solid transparent;
+      padding: 2vw 4vw;
+    }
+
+    .vipNavigationActive{
+     border-bottom: 1vw solid #33bcd4;
+    }
+  }
+
+  .swiper{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vw;
+  }
+
+  .swiper-slide{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+      height: 35vw;
+      width: auto;
+    }
+  }
+
+  .vip-card-text{
+    position: absolute;
+    bottom: 4.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    // background-color: orange;
+  }
+
+  .vip-text-top{
+    font-family: "Microsoft YaHei";
+    font-size: 2vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0.2vw;
+    color: #ffffff;
+    margin-bottom: 2vw;
+  }
+
+  .vip-text-mid{
+    font-family: "Microsoft YaHei";
+    font-size: 2vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0.2vw;
+    color: #ffffff;
+    margin-bottom: 3.5vw;
+  }
+
+  .vip-text-bottom{
+    font-family: "Microsoft YaHei";
+  	font-size: 2.2vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.2vw;
+  	color: #590101;
+    background-image: linear-gradient(90deg, #e3d5a8 0%, #a88f5d 100%), linear-gradient(#122336, #122336);
+	  background-blend-mode: normal, normal;
+	  border-radius: 0.7vw;
+    padding: 1.5vw 6vw;
+    margin-left: 2.4vw;
+  }
+
+  .progress-bar-percentage{
+    width: 52vw;
+    margin: 0 auto;
+    font-family: "Microsoft YaHei";
+  	font-size: 3vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.3vw;
+  	color: #ffffff;
+    margin-top: 7vw;
+  }
+
+  .progress-bar-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+  }
+
+  .progress-label-vip1{
+    font-family: "Microsoft YaHei";
+  	font-size: 3vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.3vw;
+  	color: #ffffff;
+  }
+
+  .progress-percentage-container{
+    width: 52vw;
+    height: 2vw;
+    background-color: #ffffff;
+	  border-radius: 1vw;
+    margin: 0 2vw;
+  }
+
+  .progress-label-vip2{
+    font-family: "Microsoft YaHei";
+  	font-size: 3vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.3vw;
+  	color: #ffffff;
+  }
+
+  .progress-bar-progress-indicator{
+    height: 100%;
+    border-radius: 1vw;
+    background-color: #48e3b0;
+  }
+
+  .progress-description{
+    font-family: "Microsoft YaHei";
+  	font-size: 3vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.5vw;
+  	color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5vw;
+  }
+
+  .vip-privileges{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3vw;
+    margin-bottom: 5vw;
+
+    span{
+      font-family: "Microsoft YaHei";
+    	font-size: 3vw;
+    	font-weight: normal;
+    	font-stretch: normal;
+    	letter-spacing: 0vw;
+    	color: #bacef1;
+    }
+  }
+
+  .vip-privileges-mark{
+    width: 0.8vw;
+    height: 4vw;
+    background-color: #33bcd4;
+    margin-right: 3vw;
+    margin-left: 3vw;
+  }
+
+  .priviliges-row{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5vw;
+  }
+
+  .privileges-col1-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 23vw;
+
+    img{
+      height: 10vw;
+      width: auto;
+    }
+  }
+
+  .privileges-col2-text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Microsoft YaHei";
+  	font-size: 2.8vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.2vw;
+  	color: #bacef1;
+    width: 23vw;
+  }
+
+  .privileges-col3-text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Microsoft YaHei";
+  	font-size: 2.8vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.2vw;
+  	color: #bacef1;
+    width: 29vw;
+  }
+
+  .privileges-col3-yuan{
+    font-size: 2vw;
+  }
+
+  .privileges-col4-button{
+    width: 18vw;
+    height: 7.5vw;
+    background-color: #33bcd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span{
+      font-family: "Microsoft YaHei";
+    	font-size: 3vw;
+    	font-weight: normal;
+    	font-stretch: normal;
+    	letter-spacing: 0.5vw;
+    	color: #ffffff;
+    }
+  }
+
+  .vip-privileges-add-margin{
+    margin-top: 7vw;
+  }
+
+  .privileges-data{
+    width: 89vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .priveleges-inner-percentage{
+    font-family: "Microsoft YaHei";
+  	font-size: 5vw;
+  	font-weight: bold;
+  	font-stretch: normal;
+  	letter-spacing: 0.6vw;
+  	color: #ccb455;
+    margin-bottom: 2vw;
+  }
+
+  .priveleges-inner-label{
+    font-family: "Microsoft YaHei";
+  	font-size: 2.5vw;
+  	font-weight: normal;
+  	font-stretch: normal;
+  	letter-spacing: 0.3vw;
+  	color: #bacef1;
+  }
+
+  .priveleges-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0vw 7vw 7vw;
+  }
+}
+
+</style>
+
+<style scoped>
+
+
+
+  .swiper-button-next{
+    width: 5vw;
+    height: 5vw;
+    right: 5vw;
+    top: 20vw;
+    opacity: 1;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .swiper-navigation-size{
+    font-size: 0vw;
+  }
+
+  .swiper-button-next:after{
+    width: 5vw;
+    height: 5vw;
+    color: transparent;
+    background-image: url("../../assets/images/vip/slide-right.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-size: 0vw;
+  }
+
+  .swiper-button-prev{
+    width: 5vw;
+    height: 5vw;
+    left: 5vw;
+    top: 20vw;
+    opacity: 1;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .swiper-button-prev:after{
+    width: 5vw;
+    height: 5vw;
+    color: transparent;
+    background-image: url("../../assets/images/vip/slide-left.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-size: 0vw;
+  }
+</style>
