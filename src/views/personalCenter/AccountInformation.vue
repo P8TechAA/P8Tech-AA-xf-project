@@ -4,7 +4,7 @@
     <xf-game-header headerTitlePassed="账户信息"></xf-game-header>
 
     <div class="account-information-exclusive-url">
-      <a href="http://www.xxxx.com" target="_blank">专属网址 : http://www.xxxx.com</a>
+      <a :href="accountInfoItems.accountInfoURL" target="_blank">专属网址 : {{accountInfoItems.accountInfoURL}}</a>
     </div>
 
     <div class="account-information-scrollable-container">
@@ -13,58 +13,58 @@
 
         <div class="account-information-inner">
           <div class="inner-prefix">账号</div>
-          <div class="inner-value">{{accountNumber}}</div>
+          <div class="inner-value">{{accountInfoItems.id}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">性别</div>
-          <div class="inner-value">{{gender}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoGender}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">姓名</div>
-          <div class="inner-value">{{name}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoName}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">生日</div>
-          <div class="inner-value">{{birthday}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoBday}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">QQ</div>
-          <div class="inner-value">{{qq}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoQq}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">微信</div>
-          <div class="inner-value">{{wechat}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoWeChat}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">邮箱</div>
-          <div class="inner-value">{{mailbox}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoMailBox}}</div>
           <div class="mailbox-verification-button" @click="verifyMailBox()">验证</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">电话</div>
-          <div class="inner-value">{{phone}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoPhone}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">注册时间</div>
-          <div class="inner-value">{{registrationTime}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoRegTime}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">专属推广码</div>
-          <div class="inner-value">{{exclusivePromotionalCode}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoPromoCode}}</div>
         </div>
 
         <div class="account-information-inner">
           <div class="inner-prefix">推广链接</div>
-          <div class="inner-value">{{sponsoredLinks}}</div>
+          <div class="inner-value">{{accountInfoItems.accountInfoSponsoredLinks}}</div>
         </div>
 
         <div class="account-information-submit-button" @click="submitAccountInformation()">
@@ -84,6 +84,27 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+const accountInformationMock = Mock.mock({
+    userMock:{
+        id: "@id",
+        accountInfoURL: "@url",
+        accountInfoGender: "Male",
+        accountInfoName: "@name",
+        accountInfoBday: "@date",
+        accountInfoQq: "@word",
+        accountInfoWeChat: "@email",
+        accountInfoMailBox: "@email",
+        accountInfoPhone: "00000000",
+        accountInfoRegTime: "@time",
+        accountInfoPromoCode: "00000000",
+        accountInfoSponsoredLinks: "@url",
+      }
+   });
+
+console.log(JSON.stringify(accountInformationMock, null, 4));
+
 export default {
   components:{
       'xf-game-header': Header,
@@ -93,26 +114,30 @@ export default {
   name: 'AccountInformation',
     data() {
       return {
-
+        accountInfoItems:{},
         accountNumber: '账号',
-gender: '性别',
-name: '姓名',
-birthday: '生日',
-qq: 'QQ',
-wechat: '微信',
-mailbox: '邮箱',
-phone: '电话',
-registrationTime: '注册时间',
-exclusivePromotionalCode: '专属推广码',
-sponsoredLinks: '推广链接',
+        gender: '性别',
+        name: '姓名',
+        birthday: '生日',
+        qq: 'QQ',
+        wechat: '微信',
+        mailbox: '邮箱',
+        phone: '电话',
+        registrationTime: '注册时间',
+        exclusivePromotionalCode: '专属推广码',
+        sponsoredLinks: '推广链接',
       }
     },
 
-    computed: {
-
+    created() {
+      this.accountInfoDataF()
     },
 
     methods: {
+      accountInfoDataF() {
+        this.accountInfoItems=accountInformationMock.userMock
+      },
+
       submitAccountInformation(){
         swal("帐户信息已提交!")
       },
@@ -122,9 +147,6 @@ sponsoredLinks: '推广链接',
       }
     },
 
-    mounted() {
-
-    }
   }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -133,26 +155,25 @@ sponsoredLinks: '推广链接',
   width: 100%;
   height: 100%;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .account-information-scrollable-container{
-    position: absolute;
-    top: 24vw;
-    bottom: 0;
-    background-color: #131724;
-    width: 100%;
-    height: 153vw;
-    overflow-y: auto;
-    padding-bottom: 15vw;
+    position: relative;
+    width: 93%;
+    margin: 0vw auto 13vw;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .account-information-exclusive-url{
     width: 100%;
     height: 12vw;
-    // background-color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    z-index: 3;
+    margin-top: 12vw;
     a{
       text-decoration: none;
       font-family: "Microsoft YaHei";
@@ -250,5 +271,9 @@ sponsoredLinks: '推广链接',
 
 <style scoped>
 
+body,html{
+  width: 100%;
+  height: 100%;
+}
 
 </style>

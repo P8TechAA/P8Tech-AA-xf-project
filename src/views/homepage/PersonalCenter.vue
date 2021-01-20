@@ -3,42 +3,40 @@
 
     <section v-if="loginStatus=='userLogin'">
       <div class="mine-avatar-image-container">
-          <div class="mine-avatar-left">
-            <img src="../../assets/images/mine/mine-login-active.png" alt="" width="100%" height="100%">
+        <div class="mine-avatar-left">
+          <img :src="personalCenterInfo.loginUserImg" alt="" width="100%" height="100%">
+        </div>
+
+        <div class="mine-avatar-right">
+          <div class="mine-avatar-user-name">
+            <span>{{personalCenterInfo.loginName}}</span><img :src="personalCenterInfo.loginRankImg" alt="" width="100%" height="100%">
           </div>
 
-          <div class="mine-avatar-right">
-            <div class="mine-avatar-user-name">
-              <span>{{mineUserName}}</span><img src="../../assets/images/mine/vip-badge.png" alt="" width="100%" height="100%">
-            </div>
-
-            <div class="mine-avatar-joining-date">
-              {{mineJoiningDate}}
-            </div>
-
-            <div class="mine-avatar-progress-bar-container">
-              <div class="mine-progress-bar-inner">
-                <div class="mine-progress-bar-indicator" :style="{width:progressBarPercentage+'%'}">
-
-                </div>
-              </div>
-              <span>{{mineVipLabel}}</span>
-            </div>
-
-            <div class="mine-upgrade-desc">
-              {{mineUpgradeDesc}}
-            </div>
+          <div class="mine-avatar-joining-date">
+            {{personalCenterInfo.loginJoiningDate}}
           </div>
+
+          <div class="mine-avatar-progress-bar-container">
+            <div class="mine-progress-bar-inner">
+              <div class="mine-progress-bar-indicator" :style="{width:personalCenterInfo.percentage+'%'}"></div>
+            </div>
+            <span>{{personalCenterInfo.loginStatus}}</span>
+          </div>
+
+          <div class="mine-upgrade-desc">
+            {{personalCenterInfo.loginDescription}}
+          </div>
+        </div>
       </div>
     </section>
 
     <section v-if="loginStatus=='userNotLogin'">
       <div class="not-login-mine-avatar-image-container">
         <div class="not-login-mine-avatar-image">
-          <img src="../../assets/images/mine/mine-login-avatar.png" alt="" width="100%" height="100%">
+          <img :src="personalCenterInfo.notLoginImg" alt="" width="100%" height="100%">
         </div>
 
-        <span>立即登录</span>
+        <span>{{personalCenterInfo.notLoginDescription}}</span>
       </div>
     </section>
 
@@ -47,7 +45,8 @@
       <div class="mine-central-wallet-top">
         <div class="mine-central-wallet-top-left">
           <span class="mine-central-text">中心钱包：</span>
-          <span class="mine-central-balance">{{centralWalletAmount}}</span>
+          <span v-if="loginStatus=='userLogin'" class="mine-central-balance">{{personalCenterInfo.percentage}}</span>
+          <span v-if="loginStatus=='userNotLogin'" class="mine-central-balance">0.00</span>
         </div>
 
         <section v-if="loginStatus=='userNotLogin'">
@@ -157,35 +156,48 @@
 <script>
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+const personalCenterMock = Mock.mock({
+    userMock:{
+        id: "@id",
+        loginName: "@name",
+        loginJoiningDate: "您已经加入xxxx300天",
+        loginUserImg: '@image("60x60","#d6d6d6")',
+        loginRankImg: '@image("30x30","#d6d6d6")',
+        loginDescription: "@sentence(2)",
+        "percentage|1-100": 100,
+        loginStatus: "VIP1",
+        notLoginImg: '@image("30x30","#d6d6d6")',
+        notLoginDescription: "立即登录",
+      }
+   });
+
+console.log(JSON.stringify(personalCenterMock, null, 4));
+
 export default {
   components:{
       'xf-footer': Footer
   },
 
   name: 'PersonalCenter',
+
     data() {
       return {
         footerMineActive: true,
-        centralWalletAmount: 0.00,
-        mineUserName: 'weishenmeagan',
-        mineJoiningDate: '您已经加入xxxx300天',
-        mineVipLabel: 'VIP1',
-        mineUpgradeDesc: '升级需要500.00存款和3000.00流水',
-        progressBarPercentage: 75,
-        loginStatus: 'userNotLogin',
+        loginStatus: 'userLogin',
+        personalCenterInfo:{},
       }
     },
 
-    computed: {
-
+    created() {
+      this.personalCenterDataF()
     },
 
     methods: {
-
-    },
-
-    mounted() {
-
+      personalCenterDataF() {
+        this.personalCenterInfo=personalCenterMock.userMock
+      }
     }
   }
 </script>
@@ -194,11 +206,9 @@ export default {
 .mine-main-container{
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0vw;
+  position: relative;
   overflow-y: auto;
-  padding-bottom: 15vw;
+  overflow-x: hidden;
 
   .mine-avatar-image-container{
     width: 100%;
@@ -217,8 +227,9 @@ export default {
     margin-right: 3vw;
 
     img{
-      width: 15vw;
+      width: 17vw;
       height: auto;
+      border-radius: 50vw;
     }
   }
 
@@ -242,6 +253,7 @@ export default {
     	letter-spacing: 0.3vw;
     	color: #ffffff;
       margin-right: 1.5vw;
+      line-height: 4vw;
     }
 
     img{
@@ -258,6 +270,7 @@ export default {
     letter-spacing: 0.3vw;
     color: #ffffff;
     margin-bottom: 1vw;
+    line-height: 4vw;
   }
 
   .mine-avatar-progress-bar-container{
@@ -272,6 +285,7 @@ export default {
       font-weight: normal;
       font-stretch: normal;
       letter-spacing: 0.3vw;
+      line-height: 4vw;
       color: #ffffff;
     }
   }
@@ -300,6 +314,7 @@ export default {
     font-stretch: normal;
     letter-spacing: 0.3vw;
     color: #ffffff;
+    line-height: 4vw;
   }
 
   .mine-central-wallet-container{
@@ -318,7 +333,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // background-color: orange;
   }
 
   .mine-central-wallet-top-left{
@@ -554,6 +568,7 @@ export default {
       height: auto;
       margin-left: 3vw;
       margin-top: 2vw;
+      border-radius: 50vw;
     }
   }
 
@@ -562,5 +577,8 @@ export default {
 </style>
 
 <style scoped>
-
+  html,body{
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -3,23 +3,21 @@
 
     <div class="home-slideshow-main-container">
       <swiper ref="mySwiper" :options="swiperOptions">
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <swiper-slide><img src="../../assets/images/home/home-slideshow-img.png" alt="" width="100%"></swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
+          <swiper-slide v-for="i in slideshowImages" :key="i.id">
+            <img :src="i.image" alt="" width="100%" height="100%">
+          </swiper-slide>
+        
+          <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
-
+         
       <div class="home-news-ticker-container">
         <div class="home-news-ticker-icon">
           <img src="../../assets/images/home/home-speaker.png" alt="" width="100%" height="100%">
         </div>
 
         <div class="home-news-ticker-text-container">
-          <marquee-text class="home-news-ticker" :duration="10">
-            <p>页面提示为准！不便之处敬请见谅 祝您生活愉快（2020年3月31日</p>
+          <marquee-text class="home-news-ticker" :duration="40">
+            <p v-for="i in newsTickerItems" :key="i.id">{{i.message}}</p>
           </marquee-text>
         </div>
       </div>
@@ -83,46 +81,49 @@
 
     <div class="home-navigation-container">
       <ul>
-        <li :class="{homeNav1Active:homeNav1Status}"><a href="#eSportsContainer">电竞赛事</a></li>
-        <li :class="{homeNav2Active:homeNav2Status}"><a href="#physicalEducationContainer">体育</a></li>
-        <li :class="{homeNav3Active:homeNav3Status}"><a href="#realPersonContainer">真人</a></li>
-        <li :class="{homeNav4Active:homeNav4Status}"><a href="#chessContainer">棋牌</a></li>
-        <li :class="{homeNav5Active:homeNav5Status}"><a href="#fishingContainer">捕鱼</a></li>
-        <li :class="{homeNav6Active:homeNav6Status}"><a href="#videoGamesContainer">电游</a></li>
+        <li :class="{navigationActive:isActive('eSports')}" @click="setActive('eSports')"><a href="#eSportsContainer">电竞赛事</a></li>
+        <li :class="{navigationActive:isActive('physicalEduc')}" @click="setActive('physicalEduc')"><a href="#physicalEducationContainer">体育</a></li>
+        <li :class="{navigationActive:isActive('realPerson')}" @click="setActive('realPerson')"><a href="#realPersonContainer">真人</a></li>
+        <li :class="{navigationActive:isActive('chess')}" @click="setActive('chess')"><a href="#chessContainer">棋牌</a></li>
+        <li :class="{navigationActive:isActive('fishing')}" @click="setActive('fishing')"><a href="#fishingContainer">捕鱼</a></li>
+        <li :class="{navigationActive:isActive('videogames')}" @click="setActive('videogames')"><a href="#videoGamesContainer">电游</a></li>
       </ul>
     </div>
 
-      <div class="scroll-area" ref="homeScrollerContainer" @scroll="scrollerFunction">
-        <div class="eSportsContainer" ref="eSportsContainer" id="eSportsContainer">
-          <img src="../../assets/images/home/esports-1.png" alt="" width="100%" height="100%">
+    <div class="scrollable-content">
+        <div class="scroll-area">
+        
+        <div class="eSportsContainer"  id="eSportsContainer" ref="eSportsContainer">
+          <div v-for="i in eSportItems" :key="i.id">
+            <img :src="i.image" alt="" width="100%" height="100%">
+          </div>
+        </div>
+        
+        <div class="physicalEducationContainer" id="physicalEducationContainer" ref="physicalEducationContainer">
+          <div v-for="i in physicalEducationItems" :key="i.id">
+            <img :src="i.image" alt="" width="100%" height="100%">
+          </div>
         </div>
 
-        <div class="physicalEducationContainer" ref="physicalEducationContainer" id="physicalEducationContainer">
-          <img src="../../assets/images/home/pe-89.png" alt="" width="100%" height="100%">
+        <div v-for="i in realPersonItems" :key="i.id" class="realPersonContainer" ref="realPersonContainer" id="realPersonContainer">
+          <img :src="i.image" alt="" width="100%" height="100%">
         </div>
 
-        <div class="realPersonContainer" ref="realPersonContainer" id="realPersonContainer">
-          <img src="../../assets/images/home/realperson-68.png" alt="" width="100%" height="100%">
-          <img src="../../assets/images/home/realperson-ag.png" alt="" width="100%" height="100%">
-          <img src="../../assets/images/home/realperson-llbet.png" alt="" width="100%" height="100%">
-          <img src="../../assets/images/home/realperson-ebet.png" alt="" width="100%" height="100%">
+        <div v-for="i in chessItems" :key="i.id" class="chessContainer" ref="chessContainer" id="chessContainer">
+          <img :src="i.image" alt="" width="100%" height="100%">
         </div>
 
-        <div class="chessContainer" ref="chessContainer" id="chessContainer">
-          <img src="../../assets/images/home/chess-1.png" alt="" width="100%" height="100%">
-          <img src="../../assets/images/home/chess-68.png" alt="" width="100%" height="100%">
-          <img src="../../assets/images/home/chess-ky.png" alt="" width="100%" height="100%">
+        <div v-for="i in fishingItems" :key="i.id" class="fishingContainer" ref="fishingContainer" id="fishingContainer">
+          <img :src="i.image" alt="" width="100%" height="100%">
         </div>
 
-        <div class="fishingContainer" ref="fishingContainer" id="fishingContainer">
-          <img src="../../assets/images/home/fishing-68.png" alt="" width="100%" height="100%">
-        </div>
-
-        <div class="videoGamesContainer" ref="videoGamesContainer" id="videoGamesContainer">
-          <img src="../../assets/images/home/videogames-ttg.png" alt="" width="100%" height="100%">
+        <div class="videoGamesContainer" id="videoGamesContainer">
+          <div v-for="i in videoGamesItems" :key="i.id" ref="videoGamesContainer">
+            <img :src="i.image" alt="" width="100%" height="100%">
+          </div>
         </div>
       </div>
-
+    </div>
 
       <xf-footer :footerHome="footerHomeActive"></xf-footer>
 
@@ -131,6 +132,76 @@
 
 <script>
 import Footer from '../../components/Footer.vue'
+
+var Mock = require('mockjs');
+const Random = Mock.Random;
+
+const homepageMock = Mock.mock({
+    "slideshowImages|5": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x100", "#d6d6d6", "#000000", "Slideshow Images")'
+      }
+    ],
+
+    "newsTicker|2": [
+      {
+        "id|+1": "@id",
+        "message":'@paragraph(2)',
+      }
+    ],
+
+    "eSports|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Esports")'
+      }
+    ],
+
+    "physicalEducation|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Physical Education")'
+      }
+    ],
+
+    "realPerson|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Real Person")'
+      }
+    ],
+
+    "chess|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Chess")'
+      }
+    ],
+
+    "fishing|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Fishing")'
+      }
+    ],
+
+    "videoGames|6": [
+      {
+        "id|+1": "@id",
+        "image":'@image("200x50", "#d6d6d6", "#000000", "Video Games")'
+      }
+    ],
+
+    "homepageTexts|2":{
+        "logoText":"LOGO",
+        "welcomeText": "欢迎您，亲爱的用户",
+        "loginNote": "请先登录",
+      },
+    
+  });
+
+console.log(JSON.stringify(homepageMock, null, 4));
 
 export default {
     components:{
@@ -160,24 +231,27 @@ export default {
         maxScrollbarLength: 60
         },
 
-        scrollerTopPosition: 0,
-        homeSection1: 0,
-        homeSection2: 0,
-        homeSection3: 0,
-        homeSection4: 0,
-        homeSection5: 0,
-        homeSection6: 0,
-
-        homeNav1Status: false,
-        homeNav2Status: false,
-        homeNav3Status: false,
-        homeNav4Status: false,
-        homeNav5Status: false,
-        homeNav6Status: false,
-
         footerHomeActive: true,
+
+        slideshowImages:[],
+        newsTickerItems:[],
+        eSportsItems:[],
+        physicalEducationItems:[],
+        realPersonItems:[],
+        chessItems:[],
+        fishingItems:[],
+        videoGamesItems:[],
+
+        homepageTexts:{},
+
+        activeItem: 'eSports',
       }
     },
+
+    created() {
+      this.homepageDataF()
+    },
+
     computed: {
       swiper() {
         return this.$refs.mySwiper.$swiper
@@ -185,75 +259,30 @@ export default {
     },
 
     methods: {
-      scrollerFunction() {
-        this.scrollerTopPosition = this.$refs.homeScrollerContainer.scrollTop;
-        this.homeSection1 = this.$refs.eSportsContainer.offsetTop;
-        this.homeSection2 = this.$refs.physicalEducationContainer.offsetTop;
-        this.homeSection3 = this.$refs.realPersonContainer.offsetTop;
-        this.homeSection4 = this.$refs.chessContainer.offsetTop;
-        this.homeSection5 = this.$refs.fishingContainer.offsetTop;
-        this.homeSection6 = this.$refs.videoGamesContainer.offsetTop;
+      homepageDataF() {
+        this.slideshowImages=homepageMock.slideshowImages;
+        this.newsTickerItems=homepageMock.newsTicker;
+        this.eSportItems=homepageMock.eSports;
+        this.physicalEducationItems=homepageMock.physicalEducation;
+        this.realPersonItems=homepageMock.realPerson;
+        this.chessItems=homepageMock.chess;
+        this.fishingItems=homepageMock.fishing;
+        this.videoGamesItems=homepageMock.videoGames;
+        this.homepageTexts=homepageMock.homepageTexts;
+      },
 
+      isActive(menuItem) {
+        return this.activeItem === menuItem
+      },
 
-        if(this.scrollerTopPosition >= ((this.homeSection1)-7)){
-          this.homeNav1Status = true;
-          this.homeNav2Status = false;
-          this.homeNav3Status = false;
-          this.homeNav4Status = false;
-          this.homeNav5Status = false;
-          this.homeNav6Status = false;
-        }
+      setActive(menuItem) {
+        this.activeItem = menuItem
+      },
 
-        if (this.scrollerTopPosition >= ((this.homeSection2)-5)){
-          this.homeNav1Status = false;
-          this.homeNav2Status = true;
-          this.homeNav3Status = false;
-          this.homeNav4Status = false;
-          this.homeNav5Status = false;
-          this.homeNav6Status = false;
-        }
-
-        if (this.scrollerTopPosition >= ((this.homeSection3)-5)){
-          this.homeNav1Status = false;
-          this.homeNav2Status = false;
-          this.homeNav3Status = true;
-          this.homeNav4Status = false;
-          this.homeNav5Status = false;
-          this.homeNav6Status = false;
-        }
-
-        if (this.scrollerTopPosition >= ((this.homeSection4)-5)){
-          this.homeNav1Status = false;
-          this.homeNav2Status = false;
-          this.homeNav3Status = false;
-          this.homeNav4Status = true;
-          this.homeNav5Status = false;
-          this.homeNav6Status = false;
-        }
-
-        if (this.scrollerTopPosition >= ((this.homeSection5)-5)){
-          this.homeNav1Status = false;
-          this.homeNav2Status = false;
-          this.homeNav3Status = false;
-          this.homeNav4Status = false;
-          this.homeNav5Status = true;
-          this.homeNav6Status = false;
-        }
-
-        if (this.scrollerTopPosition >= ((this.homeSection6)-5)){
-          this.homeNav1Status = false;
-          this.homeNav2Status = false;
-          this.homeNav3Status = false;
-          this.homeNav4Status = false;
-          this.homeNav5Status = false;
-          this.homeNav6Status = true;
-        }
-
-      }
     },
 
     mounted() {
-      this.scrollerFunction();
+      
     }
   }
 </script>
@@ -266,7 +295,7 @@ export default {
 
   .home-slideshow-main-container{
     width: 100%;
-    height: auto;
+    height: 50vw;
     line-height: 0;
     position: relative;
   }
@@ -320,12 +349,14 @@ export default {
   }
 
   .home-welcome-user-container{
+    position: relative;
     width: 100%;
     height: 7.5vw;
     background-color: #212534;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    z-index: 3;
   }
 
   .home-welcome-logo{
@@ -388,12 +419,14 @@ export default {
   }
 
   .home-menu-container{
+    position: relative;
     width: 100%;
     height: 18vw;
     background-color: #1a1c28;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 3;
   }
 
   .home-icon-container{
@@ -430,12 +463,14 @@ export default {
   }
 
   .home-navigation-container{
+    position: relative;
     width: 100%;
     height: 7.6vw;
     background-color: #1a1c28;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 3;
 
     ul{
       width: 100%;
@@ -467,8 +502,7 @@ export default {
       color: inherit;
     }
 
-    .homeNav1Active, .homeNav2Active, .homeNav3Active, .homeNav4Active, .homeNav5Active, .homeNav6Active{
-      // background-color: orange;
+    .navigationActive{
       color: #FFFFFF;
       background-image: linear-gradient(0deg, #11131f 10%, #203d4f 100%),
     	linear-gradient(#11131f, #11131f);
@@ -477,76 +511,48 @@ export default {
     }
   }
 
-  .scroll-area {
-    width: 100%;
-    height: 95vw;
+  .scrollable-content{
     position: absolute;
-    top: 82.5vw;
-    bottom: 0;
-    background-color: #131724;
-    text-align: center;
+    top: 0vw;
+    right: 0vw;
+    bottom: 0vw;
+    left: 0vw;
+    height: 100%;
+    width: 100%;
     overflow-y: auto;
-    scroll-behavior: smooth;
-    padding-top: 2vw;
-    padding-bottom: 70vw;
+    // padding-top: 85vw;
+    // padding-bottom: 12vw;
+  }
+
+  .scroll-area {
+    position: relative;
+    width: 93%;
+    margin: 0 auto;
 
     img{
-      width: 95%;
+      width: 100%;
       height: auto;
       border-radius: 1vw;
     }
   }
 
-  // .home-footer{
-  //   position: fixed;
-  //   bottom: 0;
-  //   background-color: #212534;
-  //   width: 100%;
-  //   height: 13vw;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   border-radius: 2vw 2vw 0vw 0vw;
-  // }
-  //
-  // .footer-inner{
-  //   width: 20%;
-  //   height: 100%;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   flex-direction: column;
-  //
-  //   img{
-  //     width: 5.5vw;
-  //     height: auto;
-  //     margin-bottom: 1vw;
-  //   }
-  //
-  //   span{
-  //     font-family: "Microsoft YaHei";
-  //   	font-size: 2.8vw;
-  //   	font-weight: normal;
-  //   	font-stretch: normal;
-  //   	letter-spacing: 0px;
-  //   	color: #bacef1;
-  //   }
-  // }
-  //
-  // .footer-active-text{
-  //   color: #33bcd4 !important;
-  // }
+  .eSportsContainer{
+    padding-top: 85vw;
+  }
+
+  .videoGamesContainer{
+    padding-bottom: 12vw;
+  }
+
 }
-
-
-
-
-
-
-
 </style>
 
 <style scoped>
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
 .swiper-pagination{
   margin-bottom: 7.5vw;
 }

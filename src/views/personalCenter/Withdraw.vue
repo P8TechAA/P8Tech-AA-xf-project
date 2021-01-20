@@ -17,7 +17,7 @@
                 中心钱包
               </div>
               <div class="central-wallet-text-bottom">
-                <span class="wallet-sign">￥</span><span class="wallet-amount">{{centralWalletAmount}}</span>
+                <span class="wallet-sign">￥</span><span class="wallet-amount">{{transferMockItems.centralWallet}}</span>
               </div>
             </div>
           </div>
@@ -31,9 +31,21 @@
         <div class="transfer-venues-hr-line"></div>
 
         <div class="transfer-venues-venues">
-          <div class="venues-venues-inner" v-if="venueIndex < ((venues.length)+1)" v-for="venueIndex in venuesToShow">
-            <div class="venues-venues-label">{{venues[(venueIndex-1)].label}}</div>
-            <div class="venues-venues-amount">{{venues[(venueIndex-1)].amount}}</div>
+          <div class="venues-venues-inner">
+            <div class="venues-venues-label">{{transferMockItems.xxSportsLabel}}</div>
+            <div class="venues-venues-amount">{{transferMockItems.xxSports}}</div>
+          </div>
+          <div class="venues-venues-inner">
+            <div class="venues-venues-label">{{transferMockItems.gamingLabel}}</div>
+            <div class="venues-venues-amount">{{transferMockItems.gaming}}</div>
+          </div>
+          <div class="venues-venues-inner">
+            <div class="venues-venues-label">{{transferMockItems.ptLabel}}</div>
+            <div class="venues-venues-amount">{{transferMockItems.pt}}</div>
+          </div>
+           <div class="venues-venues-inner">
+           <div class="venues-venues-label">{{transferMockItems.mgLabel}}</div>
+            <div class="venues-venues-amount">{{transferMockItems.mg}}</div>
           </div>
         </div>
 
@@ -128,6 +140,24 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+const transferMock = Mock.mock({
+    transferMock:{
+        "centralWallet|1-100.2": 100,
+        xxSportsLabel: "XX体育",
+        "xxSports|1-100.2": 100,
+        gamingLabel: "电竞",
+        "gaming|1-100.2": 100,
+        ptLabel: "PT",
+        "pt|1-100.2": 100,
+        mgLabel: "MG+",
+        "mg|1-100.2": 100,
+      }
+   });
+
+console.log(JSON.stringify(transferMock, null, 4));
+
 export default {
   components:{
       'xf-footer': Footer,
@@ -137,6 +167,9 @@ export default {
   name: 'Transfer',
     data() {
       return {
+
+        transferMockItems:{},
+
         options: [{
           value: '选项1',
           label: '选项1'
@@ -186,11 +219,15 @@ export default {
       }
     },
 
-    computed: {
-
+    created() {
+      this.transferMockF()
     },
 
     methods: {
+      transferMockF() {
+        this.transferMockItems=transferMock.transferMock
+      },
+
       showMoreVenues(){
         this.venuesToShow += 4;
       },

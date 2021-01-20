@@ -17,116 +17,54 @@
 
       <section v-if="step=='android'">
 
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX安卓版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="androidDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
+         <div v-for="i in appAndroidDownloadItems" :key="i.id">
+            <div class="download-containers">
+              <div class="download-logo">
+                <img :src="i.image" alt="" width="100%" height="100%">
+              </div>
+              
+              <div class="download-desc">
+                <div class="download-desc-top">
+                  {{i.downloadDescOne}}
+                </div>
+                <div class="download-desc-bottom">
+                  {{i.downloadDescTwo}}
+                </div>
+              </div>
+
+              <div class="download-button" @click="androidDownloadF()">
+                <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
+                <span>下载</span>
+              </div>
           </div>
         </div>
 
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX安卓版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="androidDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
-          </div>
-        </div>
-
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX安卓版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="androidDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
-          </div>
-        </div>
+        
 
       </section>
 
 
       <section v-if="step=='apple'">
 
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX苹果版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="appleDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
-          </div>
-        </div>
+        <div v-for="i in appAppleDownloadItems" :key="i.id">
+            <div class="download-containers">
+              <div class="download-logo">
+                <img :src="i.image" alt="" width="100%" height="100%">
+              </div>
+              
+              <div class="download-desc">
+                <div class="download-desc-top">
+                  {{i.downloadDescOne}}
+                </div>
+                <div class="download-desc-bottom">
+                  {{i.downloadDescTwo}}
+                </div>
+              </div>
 
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX苹果版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="appleDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
-          </div>
-        </div>
-
-        <div class="download-containers">
-          <div class="download-logo">
-            LOGO
-          </div>
-          <div class="download-desc">
-            <div class="download-desc-top">
-              XX苹果版
-            </div>
-            <div class="download-desc-bottom">
-              安全快捷，支持各大游戏平台
-            </div>
-          </div>
-          <div class="download-button" @click="appleDownloadF()">
-            <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-            <span>下载</span>
+              <div class="download-button" @click="androidDownloadF()">
+                <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
+                <span>下载</span>
+              </div>
           </div>
         </div>
 
@@ -144,6 +82,30 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+const appDownloadMock = Mock.mock({
+    "downloadAndroidMock|2-6":[
+      {
+        id: "@id",
+        downloadDescOne: "@word",
+        downloadDescTwo: "@word",
+        "image":'@image("20x20", "#d6d6d6", "#000000", "logo")'
+      }
+      ],
+
+      "downloadAppleMock|2-6":[
+      {
+        id: "@id",
+        downloadDescOne: "@word",
+        downloadDescTwo: "@word",
+        "image":'@image("50x50", "#d6d6d6", "#000000", "logo")'
+      }
+      ],
+   });
+
+console.log(JSON.stringify(appDownloadMock, null, 4));
+
 export default {
   components:{
       'xf-footer': Footer,
@@ -156,14 +118,21 @@ export default {
         androidNavStatus: true,
         appleNavStatus: false,
         step: 'android',
+        appAndroidDownloadItems:[],
+        appAppleDownloadItems:[],
       }
     },
 
-    computed: {
-
+     created() {
+      this.appDownloadDataF()
     },
 
     methods: {
+      appDownloadDataF() {
+        this.appAndroidDownloadItems=appDownloadMock.downloadAndroidMock
+         this.appAppleDownloadItems=appDownloadMock.downloadAppleMock
+      },
+
       androidTabF(){
         this.androidNavStatus = true,
         this.appleNavStatus = false,
@@ -185,9 +154,6 @@ export default {
       }
     },
 
-    mounted() {
-
-    }
   }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -279,14 +245,16 @@ export default {
   }
 
   .download-logo{
-    font-family: "Microsoft YaHei";
-  	font-size: 3vw;
-  	font-weight: bold;
-  	font-stretch: normal;
-  	letter-spacing: 0vw;
-  	color: #2d879c;
-    width: 14vw;
-    padding-left: 1vw;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4vw;
+
+    img{
+      width: 10vw;
+      height: auto;
+    }
   }
 
   .download-desc{
@@ -343,5 +311,8 @@ export default {
 </style>
 
 <style scoped>
-
+  body,html{
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -4,22 +4,24 @@
     <xf-game-header headerTitlePassed="游戏机"></xf-game-header>
 
     <div class="game-console-categories-container">
-      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive:slotMachineStatus}" @click="slotMachineF">
+      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive: isActive('slotmachine')}" @click="setActive('slotmachine')">
         <span>老虎机</span>
       </div>
 
-      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive:slotTableGamesStatus}" @click="tableGamesF">
+      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive: isActive('tablegames')}" @click="setActive('tablegames')">
         <span>桌面游戏</span>
       </div>
 
-      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive:slotTableGames2Status}" @click="tableGames2F">
+      <div class="game-console-categories-inner" :class="{gameConsoleCategoriesInnerActive: isActive('tablegames2')}" @click="setActive('tablegames2')">
         <span>桌面游戏</span>
       </div>
     </div>
 
-    <div v-if="gameConsoleGame=='slotMachine'">
+    <div class="games-main-container">
+
+    <div v-if="activeItem =='slotmachine'">
       <div class="game-console-search-bar-container">
-           <input type="text" v-model="searchGameConsole" placeholder="请输入关键字" />
+           <input type="text" v-model="searchSlotGames" placeholder="请输入关键字" />
           <div class="game-console-search-bar">
               <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
               <span>搜索</span>
@@ -28,14 +30,58 @@
 
       <div class="game-console-scrollable-container">
         <div class="game-console-game-cards-container">
-            <div class="game-console-cards-inner-container" v-if="consoleGameList.length">
-              <div class="game-console-images-text-container" v-for="game in gamesList">
-                  <img :src="game.src" alt="" width="100%" height="100%">
-                  <span>{{game.title}}</span>
+            <div class="game-console-cards-inner-container" v-if="tableGameOneItems.length">
+              <div class="game-console-images-text-container" v-for="game in gamesListOne" :key="game.id">
+                  <img :src="game.gameImage" alt="" width="100%" height="100%">
+                  <span>{{game.gameTitle}}</span>
               </div>
             </div>
         </div>
       </div>
+    </div>
+
+    <div v-if="activeItem =='tablegames'">
+      <div class="game-console-search-bar-container">
+           <input type="text" v-model="searchTableGameOne" placeholder="请输入关键字" />
+          <div class="game-console-search-bar">
+              <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
+              <span>搜索</span>
+          </div>
+      </div>
+
+      <div class="game-console-scrollable-container">
+        <div class="game-console-game-cards-container">
+            <div class="game-console-cards-inner-container" v-if="tableGameOneItems.length">
+              <div class="game-console-images-text-container" v-for="game in gamesListTwo" :key="game.id">
+                  <img :src="game.gameImage" alt="" width="100%" height="100%">
+                  <span>{{game.gameTitle}}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="activeItem =='tablegames2'">
+      <div class="game-console-search-bar-container">
+           <input type="text" v-model="searchTableGameTwo" placeholder="请输入关键字" />
+          <div class="game-console-search-bar">
+              <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
+              <span>搜索</span>
+          </div>
+      </div>
+
+      <div class="game-console-scrollable-container">
+        <div class="game-console-game-cards-container">
+            <div class="game-console-cards-inner-container" v-if="tableGameTwoItems.length">
+              <div class="game-console-images-text-container" v-for="game in gamesListThree" :key="game.id">
+                  <img :src="game.gameImage" alt="" width="100%" height="100%">
+                  <span>{{game.gameTitle}}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
     <xf-footer :footerGameConsole="footerGameConsoleActive"></xf-footer>
@@ -47,6 +93,37 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+
+const slotMachineMock = Mock.mock({
+    "slotMachine|60": [
+      {
+        id: '@id',
+        gameTitle: "@word",
+        gameImage: "@image('100x130', '#FFFFFF', 'Slot Machine')"
+      }
+    ],
+
+    "tableGameOne|60": [
+      {
+        id: '@id',
+        gameTitle: "@word",
+        gameImage: "@image('100x130', '#FFFFFF', 'Table Game')"
+      }
+    ],
+
+    "tableGameTwo|60": [
+      {
+        id: '@id',
+        gameTitle: "@word",
+        gameImage: "@image('100x130', '#FFFFFF', 'Table Game 2')"
+      }
+    ],
+   });
+
+console.log(JSON.stringify(slotMachineMock, null, 4));
+
 export default {
   components:{
       'xf-game-header': Header,
@@ -56,69 +133,72 @@ export default {
   name: 'GameConsole',
     data() {
       return {
-        searchGameConsole: null,
-        consoleGameList:[
-            {title:"武则天", src: require('../../assets/images/gameconsole/wuzetian.png')},
-            {title:"神啊hi", src: require('../../assets/images/gameconsole/godhi.png')},
-            {title:"马楼", src: require('../../assets/images/gameconsole/malou.png')},
-            {title:"武则天", src: require('../../assets/images/gameconsole/wuzetian.png')},
-            {title:"神啊hi", src: require('../../assets/images/gameconsole/godhi.png')},
-            {title:"马楼", src: require('../../assets/images/gameconsole/malou.png')},
-            {title:"武则天", src: require('../../assets/images/gameconsole/wuzetian.png')},
-            {title:"神啊hi", src: require('../../assets/images/gameconsole/godhi.png')},
-            {title:"马楼", src: require('../../assets/images/gameconsole/malou.png')},
-            {title:"武则天", src: require('../../assets/images/gameconsole/wuzetian.png')},
-            {title:"神啊hi", src: require('../../assets/images/gameconsole/godhi.png')},
-            {title:"马楼", src: require('../../assets/images/gameconsole/malou.png')},
-        ],
-
-        slotMachineStatus: true,
-        slotTableGamesStatus: false,
-        slotTableGames2Status: false,
+        activeItem: 'slotmachine',
+        searchSlotGames: null,
+        searchTableGameOne: null,
+        searchTableGameTwo: null,
         gameConsoleGame: 'slotMachine',
 
-        footerGameConsoleActive: true
+        footerGameConsoleActive: true,
+
+        slotMachineItems:[],
+        tableGameOneItems:[],
+        tableGameTwoItems:[],
+
       }
     },
 
     computed: {
-        gamesList(){
-        if(this.searchGameConsole){
-          return this.consoleGameList.filter((game)=>{
-            return this.searchGameConsole.toLowerCase().split(' ').every(v => game.title.toLowerCase().includes(v))
+        gamesListOne(){
+        if(this.searchSlotGames){
+          return this.slotMachineItems.filter((game)=>{
+            return this.searchSlotGames.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
           })
         }else{
-          return this.consoleGameList;
+          return this.slotMachineItems;
+        }
+      },
+
+      gamesListTwo(){
+        if(this.searchTableGameOne){
+          return this.tableGameOneItems.filter((game)=>{
+            return this.searchTableGameOne.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
+          })
+        }else{
+          return this.tableGameOneItems;
+        }
+      },
+
+      gamesListThree(){
+        if(this.searchTableGameTwo){
+          return this.tableGameTwoItems.filter((game)=>{
+            return this.searchTableGameTwo.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
+          })
+        }else{
+          return this.tableGameTwoItems;
         }
       }
     },
 
     methods: {
-      slotMachineF(){
-        this.slotMachineStatus = true,
-        this.slotTableGamesStatus = false,
-        this.slotTableGames2Status = false,
-        this.gameConsoleGame = 'slotMachine'
+      slotMachineDataF() {
+        this.slotMachineItems=slotMachineMock.slotMachine
+        this.tableGameOneItems=slotMachineMock.tableGameOne
+        this.tableGameTwoItems=slotMachineMock.tableGameTwo
       },
 
-      tableGamesF(){
-        this.slotMachineStatus = false,
-        this.slotTableGamesStatus = true,
-        this.slotTableGames2Status = false,
-        this.gameConsoleGame = 'tableGames'
+      isActive(menuItem) {
+        return this.activeItem === menuItem
       },
 
-      tableGames2F(){
-        this.slotMachineStatus = false,
-        this.slotTableGamesStatus = false,
-        this.slotTableGames2Status = true,
-        this.gameConsoleGame = 'tableGames2'
+      setActive(menuItem) {
+        this.activeItem = menuItem
       },
     },
 
-    mounted() {
-
-    }
+    created() {
+      this.slotMachineDataF()
+    },
   }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -127,12 +207,21 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .game-console-categories-container{
-    width: 93vw;
-    margin: 3.5vw auto;
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: 18vw;
+    margin: 12vw auto 0vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    background-color:  #131724;
+    padding: 0vw 5vw;
+    // background-color: green;    
   }
 
   .game-console-categories-inner{
@@ -166,12 +255,19 @@ export default {
     }
   }
 
+  .games-main-container{
+    position: relative;
+    width: 100%;
+    margin: 30vw auto 0vw;
+  }
 
   .game-console-search-bar-container{
-    width: 93vw;
+    position: fixed;
+    z-index: 3;
     height: 11.5vw;
+    width: 100%;
     margin: 0 auto;
-    position: relative;
+    padding: 0 4vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -206,7 +302,7 @@ export default {
   .game-console-search-bar{
     position: absolute;
     top: 1.6vw;
-    right: 2.5vw;
+    right: 6vw;
     width: 22vw;
     height: 8.5vw;
     background-color: #33bcd4;
@@ -232,14 +328,12 @@ export default {
   }
 
   .game-console-scrollable-container{
-      position: absolute;
-      top: 41.9vw;
-      bottom: 0;
-      width: 100%;
-      height: 135.5vw;
-      overflow-y: auto;
-      padding-top: 2vw;
-      padding-bottom: 14vw;
+      position: relative;
+      width: 93%;
+      margin: 0vw auto 15vw;
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 13vw;
   }
 
   .game-console-game-cards-container{
@@ -287,5 +381,8 @@ export default {
 </style>
 
 <style scoped>
-
+  body,html{
+    width: 100%;
+    height: 100%;
+  }
 </style>

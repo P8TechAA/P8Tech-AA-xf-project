@@ -237,10 +237,6 @@ export default {
   -webkit-tap-highlight-color: transparent;
   }
 
-  .dragon{
-    font-size: 3vw;
-    color: red;
-  }
 }
 </style>
 

@@ -3,8 +3,6 @@
 
     <div class="vip-scrollable-container">
 
-
-
       <div class="vip-top-container">
         <div class="vip-top-top">
             <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
@@ -13,19 +11,19 @@
 
         <swiper class="swiper" :options="swiperOption">
           <swiper-slide>
-              <img src="../../assets/images/vip/vip-card-img.png" alt="" width="100%" height="100%">
+              <img :src="vipMockItems.vipImageLeft" alt="" width="100%" height="100%">
               <div class="vip-card-text">
-                <span class="vip-text-top">>存款量少20元可申请一次</span>
-                <span class="vip-text-mid">>晋级奖金18888元</span>
-                <span class="vip-text-bottom">立即申请</span>
+                <span class="vip-text-top">{{vipMockItems.vipLeftTextOne}}</span>
+                <span class="vip-text-mid">{{vipMockItems.vipLeftTextTwo}}</span>
+                <span class="vip-text-bottom">{{vipMockItems.vipLeftButton}}</span>
               </div>
           </swiper-slide>
           <swiper-slide class="vip-swiper-image">
-            <img src="../../assets/images/vip/vip-card-img.png" alt="" width="100%" height="100%">
+            <img :src="vipMockItems.vipImageRight" alt="" width="100%" height="100%">
             <div class="vip-card-text">
-              <span class="vip-text-top">>存款量少20元可申请一次</span>
-              <span class="vip-text-mid">>晋级奖金18888元</span>
-              <span class="vip-text-bottom">立即申请</span>
+              <span class="vip-text-top">{{vipMockItems.vipRighttTextOne}}</span>
+              <span class="vip-text-mid">{{vipMockItems.vipRightTextTwo}}</span>
+              <span class="vip-text-bottom">{{vipMockItems.vipRightButton}}</span>
             </div>
           </swiper-slide>
           <div class="swiper-button-prev" slot="button-prev"></div>
@@ -33,7 +31,7 @@
         </swiper>
 
         <div class="progress-bar-percentage">
-          {{progressBarPercentage}}%
+          {{vipMockItems.balance}}%
         </div>
 
         <div class="progress-bar-bar">
@@ -41,7 +39,7 @@
             VIP1
           </div>
           <div class="progress-percentage-container">
-            <div class="progress-bar-progress-indicator" :style="{width:progressBarPercentage+'%'}"></div>
+            <div class="progress-bar-progress-indicator" :style="{width:vipMockItems.balance+'%'}"></div>
           </div>
           <div class="progress-label-vip2">
             VIP2
@@ -49,7 +47,7 @@
         </div>
 
         <div class="progress-description">
-            您已完成{{vipDeposit}}存款和{{vipTurnover}}流水
+            您已完成{{vipMockItems.deposit}}存款和{{vipMockItems.turnover}}流水
         </div>
       </div>
 
@@ -102,7 +100,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{esportsRebate}}%
+            {{vipMockItems.eSportsRebate}}%
           </div>
           <div class="priveleges-inner-label">
             电竞返水
@@ -111,7 +109,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{sportsRebate}}%
+            {{vipMockItems.sportsRebate}}%
           </div>
           <div class="priveleges-inner-label">
             体育返水
@@ -120,7 +118,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{liveRebate}}%
+            {{vipMockItems.realityRebate}}%
           </div>
           <div class="priveleges-inner-label">
             真人返水
@@ -129,7 +127,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{electronicRebate}}%
+            {{vipMockItems.electronicRebate}}%
           </div>
           <div class="priveleges-inner-label">
             电子返水
@@ -138,7 +136,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{fishingBackWatersRebate}}%
+            {{vipMockItems.fishingRebate}}%
           </div>
           <div class="priveleges-inner-label">
             捕鱼返水
@@ -147,7 +145,7 @@
 
         <div class="priveleges-inner">
           <div class="priveleges-inner-percentage">
-            {{chessCardRebate}}%
+            {{vipMockItems.chessRebate}}%
           </div>
           <div class="priveleges-inner-label">
             棋牌返水
@@ -167,6 +165,36 @@
 <script>
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+const Random = Mock.Random;
+const vipMock = Mock.mock({
+    vipMock:{
+        id: "@id",
+        vipImageLeft: "@image('100x60','#d6d6d6', 'VIP Image')",
+        vipLeftTextOne: ">存款量少20元可申请一次",
+        vipLeftTextTwo: ">晋级奖金18888元",
+        vipLeftButton: "立即申请",
+       
+        vipImageRight: '@image("100x60","#d6d6d6", "VIP Image")',
+        vipRighttTextOne: ">存款量少20元可申请一次",
+        vipRightTextTwo: ">晋级奖金18888元",
+        vipRightButton: "立即申请",
+
+        "balance|1-100": 100,
+        "deposit|1-100.2": 100,
+        "turnover|1-100.2": 100,
+
+        "eSportsRebate|1-100.2": 100,
+        "sportsRebate|1-100.2": 100,
+        "realityRebate|1-100.2": 100,
+        "electronicRebate|1-100.2": 100,
+        "fishingRebate|1-100.2": 100,
+        "chessRebate|1-100.2": 100,
+      }
+   });
+
+console.log(JSON.stringify(vipMock, null, 4));
+
 export default {
   components:{
       'xf-footer': Footer
@@ -175,6 +203,8 @@ export default {
   name: 'VIP',
     data() {
       return {
+        vipMockItems:{},
+
         vipPrivilegesStatus: true,
         vipDetailsStatus: false,
         progressBarPercentage: 60,
@@ -203,11 +233,15 @@ export default {
       }
     },
 
-    computed: {
-
+    created() {
+      this.vipMockF()
     },
 
     methods: {
+      
+      vipMockF() {
+        this.vipMockItems=vipMock.vipMock
+      },
 
       privilegesTab(){
         this.step = 'vip1'
@@ -221,10 +255,6 @@ export default {
         this.vipDetailsStatus = true
       }
     },
-
-    mounted() {
-
-    }
   }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -305,7 +335,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    // background-color: orange;
   }
 
   .vip-text-top{
@@ -506,10 +535,10 @@ export default {
   }
 
   .privileges-data{
-    width: 89vw;
+    width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }
@@ -534,6 +563,7 @@ export default {
   }
 
   .priveleges-inner{
+    width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -546,7 +576,10 @@ export default {
 
 <style scoped>
 
-
+  body,html{
+    width: 100%;
+    height: 100%;
+  }
 
   .swiper-button-next{
     width: 5vw;

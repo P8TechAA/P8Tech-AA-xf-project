@@ -6,23 +6,25 @@
     <div class="customer-service-scrollable-container">
 
       <div class="customer-service-banner">
-        <img src="../../assets/images/customerservice/customer-service-banner.png" alt="" width="100%" height="100%">
+        <img :src="customerServiceItems.customerServiceImg" alt="">
       </div>
 
       <div class="customer-service-info-container">
-        <p>欢迎联系XX</p>
-        <p>我们的官网是&nbsp;<a href="https://www.xxxxx.com" target="_blank">https://www.xxxxx.com</a></p>
-        <p>XX五大优惠滚动来袭，日日存，日日送，每日惊喜不重样。邀新朋，唤旧友，XX100元彩金免费领！</p>
+        <div class="cSWelcomeText">{{customerServiceItems.sentence1}}</div>
+        <div class="cSWebsite">
+        {{customerServiceItems.websiteText}}&nbsp;<a :href="customerServiceItems.websiteAddress" target="_blank">{{customerServiceItems.websiteAddress}}</a>
+        </div>
+        <div class="cSDescription">{{customerServiceItems.customerServiceDescription}}</div>
       </div>
 
-      <div class="customer-service-contactqq">
-          <img src="../../assets/images/customerservice/customer-service-contactqq.png" alt="" width="100%" height="100%">
-          <span>联系QQ</span>
+      <div class="customer-service-button-1">
+          <img :src="customerServiceItems.csBtn1Image" alt="">
+          <span>{{customerServiceItems.csBtn1Text}}</span>
       </div>
 
-      <div class="customer-service-contactqq">
-          <img src="../../assets/images/customerservice/customer-service-online-service.png" alt="" width="100%" height="100%">
-          <span>在线客服</span>
+      <div class="customer-service-button-2">
+          <img :src="customerServiceItems.csBtn2Image" alt="">
+          <span>{{customerServiceItems.csBtn2Text}}</span>
       </div>
 
     </div>
@@ -37,6 +39,25 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
+var Mock = require('mockjs');
+
+const customerServiceMock = Mock.mock({
+    "customerServiceData":{
+        id: "@id",
+        customerServiceImg: "@image('200x45','#4A7BF7','Image')",
+        sentence1: "@sentence(1)",
+        websiteText: "我们的官网是",
+        websiteAddress: "@url",
+        customerServiceDescription: "@paragraph(1)",
+        csBtn1Image:"@image('50x50','#fefefe','Button')",
+        csBtn1Text:"联系QQ",
+        csBtn2Image:"@image('50x50','#fefefe','Button')",
+        csBtn2Text:"在线客服",
+      }
+   });
+
+console.log(JSON.stringify(customerServiceMock, null, 4));
+
 export default {
   components:{
       'xf-footer': Footer,
@@ -44,24 +65,24 @@ export default {
   },
 
   name: 'CustomerService',
-    data() {
-      return {
-        footerCustomerServiceActive: true,
-      }
-    },
 
-    computed: {
+  data() {
+    return {
+      footerCustomerServiceActive: true,
+      customerServiceItems:{}
+    }
+  },
 
-    },
+  created() {
+    this.customerServiceDataF()
+  },
 
-    methods: {
-
-    },
-
-    mounted() {
-
+  methods: {
+    customerServiceDataF() {
+      this.customerServiceItems=customerServiceMock.customerServiceData;
     }
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 
@@ -69,23 +90,19 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .customer-service-scrollable-container{
-    position: absolute;
-    top: 12vw;
-    bottom: 0;
-    background-color: #131724;
-    width: 100%;
-    height: 165vw;
-    overflow-y: auto;
-    padding-top: 4.5vw;
-    padding-bottom: 15vw;
+    position: relative;
+    width: 93%;
+    margin: 16vw auto 17vw;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .customer-service-banner{
-    width: 94vw;
-    height: auto;
-    margin: 0 auto;
+    width: 100%;
 
     img{
       width: 100%;
@@ -96,39 +113,65 @@ export default {
   }
 
   .customer-service-info-container{
-    width: 94vw;
+    width: 100%;
     background-color: #212534;
-    margin: 0 auto;
-    padding: 4vw 9vw 6vw;
+    padding: 6vw 9vw 6vw;
     border-radius: 3vw;
     margin-top: 2vw;
     word-break: break-all;
-
-    p{
-      font-family: "Microsoft YaHei";
-    	font-size: 3vw;
-      line-height: 5vw;
-    	font-weight: normal;
-    	font-stretch: normal;
-    	letter-spacing: 0px;
-    	color: #bacef1;
-    }
-
-    a{
-      text-decoration: none;
-      color: #33bcd4;
-    }
   }
 
-  .customer-service-contactqq{
-    width: 94vw;
+  .cSWelcomeText{
+    font-family: "Microsoft YaHei";
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0vw;
+    color: #bacef1;
+    line-height: 5vw;
+    margin-bottom: 3vw;
+  }
+
+  .cSWebsite{
+    font-family: "Microsoft YaHei";
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0vw;
+    color: #bacef1;
+    line-height: 5vw;
+    margin-bottom: 3vw;
+  }
+
+  .cSWebsite a{
+    font-family: "Microsoft YaHei";
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0vw;
+    color: #33bcd4;
+    line-height: 5vw;
+    text-decoration: none;
+  }
+
+  .cSDescription{
+    font-family: "Microsoft YaHei";
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0vw;
+    color: #bacef1;
+    line-height: 5vw;
+  }
+
+  .customer-service-button-1{
+    width: 100%;
     height: 11.5vw;
-    margin: 0 auto;
     background-color: #33bcd4;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5.5vw;
+    margin-top: 5vw;
 
     img{
       width: 7vw;
@@ -143,17 +186,52 @@ export default {
     	font-stretch: normal;
     	letter-spacing: 0px;
     	color: #fefefe;
+      line-height: 4vw;
     }
   }
 
-  .customer-service-contactqq:hover{
+  .customer-service-button-1:hover{
     cursor: pointer;
   }
 
+  .customer-service-button-2{
+    width: 100%;
+    height: 11.5vw;
+    background-color: #33bcd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vw;
+
+    img{
+      width: 7vw;
+      height: auto;
+      margin-right: 2vw;
+    }
+
+    span{
+      font-family: "Microsoft YaHei";
+    	font-size: 3vw;
+    	font-weight: normal;
+    	font-stretch: normal;
+    	letter-spacing: 0px;
+    	color: #fefefe;
+      line-height: 4vw;
+    }
+  }
+
+  .customer-service-button-2:hover{
+    cursor: pointer;
+  }
 }
 
 </style>
 
 <style scoped>
+
+  body,html{
+    width: 100%;
+    height: 100%;
+  }
 
 </style>

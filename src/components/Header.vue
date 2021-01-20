@@ -23,13 +23,15 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .header-title{
-  position: relative;
+  // position: relative;
+  position: fixed;
   width: 100%;
   height: 12vw;
   background-color: #212534;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 
   span{
     font-family: "Microsoft YaHei";
@@ -46,7 +48,6 @@ export default {
   top: 0;
   left: 0;
   height: 100%;
-  // background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,4 +58,11 @@ export default {
     width: auto;
   }
 }
+</style>
+
+<style scoped>
+  html,body{
+    position: relative;
+    height: 100%;
+  }
 </style>
