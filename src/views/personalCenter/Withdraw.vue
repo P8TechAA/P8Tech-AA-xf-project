@@ -4,12 +4,11 @@
     <xf-game-header headerTitlePassed="转账"></xf-game-header>
 
     <div class="transfer-scrollable-container">
-
       <div class="transfer-venues-container">
         <div class="transfer-venues-top">
           <div class="venues-central-wallet">
             <div class="central-wallet-image">
-                <img src="../../assets/images/transfer/central-wallet.png" alt="" width="100%" height="100%">
+              <img src="../../assets/images/transfer/central-wallet.png" alt="" width="100%" height="100%">
             </div>
 
             <div class="central-wallet-text">
@@ -52,7 +51,6 @@
         <div class="venues-venues-show-more" @click="showMoreVenues()">
           <span>显示所有场馆</span><img src="../../assets/images/games/arrow-down.png" alt="" width="100%" height="100%">
         </div>
-
       </div>
 
       <section v-if="step=='addWithdrawal'">
@@ -127,14 +125,12 @@
           <span>立即转账</span>
         </div>
       </section>
-
     </div>
 
     <xf-footer></xf-footer>
 
   </div>
 </template>
-
 
 <script>
 import Header from '../../components/Header.vue'
@@ -143,127 +139,110 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const transferMock = Mock.mock({
-    transferMock:{
-        "centralWallet|1-100.2": 100,
-        xxSportsLabel: "XX体育",
-        "xxSports|1-100.2": 100,
-        gamingLabel: "电竞",
-        "gaming|1-100.2": 100,
-        ptLabel: "PT",
-        "pt|1-100.2": 100,
-        mgLabel: "MG+",
-        "mg|1-100.2": 100,
-      }
-   });
+  transferMock:{
+    "centralWallet|1-100.2": 100,
+    xxSportsLabel: "XX体育",
+    "xxSports|1-100.2": 100,
+    gamingLabel: "电竞",
+    "gaming|1-100.2": 100,
+    ptLabel: "PT",
+    "pt|1-100.2": 100,
+    mgLabel: "MG+",
+    "mg|1-100.2": 100,
+  }
+});
 
 console.log(JSON.stringify(transferMock, null, 4));
 
 export default {
   components:{
-      'xf-footer': Footer,
-      'xf-game-header': Header
+    'xf-footer': Footer,
+    'xf-game-header': Header
   },
 
   name: 'Transfer',
-    data() {
-      return {
 
-        transferMockItems:{},
+  data() {
+    return {
+      transferMockItems:{},
 
-        options: [{
-          value: '选项1',
-          label: '选项1'
-        }, {
-          value: '选项2',
-          label: '选项2'
-        }, {
-          value: '选项3',
-          label: '选项3'
-        }, {
-          value: '选项4',
-          label: '选项4'
-        }, {
-          value: '选项5',
-          label: '选项5'
-        }],
-        value: '',
-        centralWalletAmount: 3333.333,
-        venues: [
-          {label: 'XX体育', amount: '0.00'},
-          {label: '电竞', amount: '0.00'},
-          {label: 'PT', amount: '0.00'},
-          {label: 'MG+', amount: '0.00'},
-          {label: 'XX体育', amount: '0.00'},
-          {label: '电竞', amount: '0.00'},
-          {label: 'PT', amount: '0.00'},
-          {label: 'MG+', amount: '0.00'},
-          {label: 'XX体育', amount: '0.00'},
+      options: [{
+        value: '选项1',
+        label: '选项1'
+      }, {
+        value: '选项2',
+        label: '选项2'
+      }, {
+        value: '选项3',
+        label: '选项3'
+      }, {
+        value: '选项4',
+        label: '选项4'
+      }, {
+        value: '选项5',
+        label: '选项5'
+      }],
+      value: '',
+      
+      transferAmountRules: {
+        transferAmount: [
+          { required: true, trigger: 'blur', message: '需要轉賬金額.' },
         ],
-
-        transferAmountRules: {
-          transferAmount: [
-            { required: true, trigger: 'blur', message: '需要轉賬金額.' },
-          ],
-        },
-
-        transferAmountForm:{
-            transferAmount: null,
-        },
-
-        venuesToShow: 4,
-
-        // This is the maximum amount of money that can be transfered
-        maxAmount: 5000,
-
-        step: 'addWithdrawal',
-      }
-    },
-
-    created() {
-      this.transferMockF()
-    },
-
-    methods: {
-      transferMockF() {
-        this.transferMockItems=transferMock.transferMock
       },
 
-      showMoreVenues(){
-        this.venuesToShow += 4;
+      transferAmountForm:{
+          transferAmount: null,
       },
 
-      transferAmountF(amount){
-        this.transferAmountForm.transferAmount = amount + ".00";
-      },
+      venuesToShow: 4,
 
-      transferMaxAmount(){
-        this.transferAmountForm.transferAmount = this.maxAmount + ".00";
-      },
-
-      submitTransferMoney(){
-        this.$refs.transferAmountForm.validate((valid) => {
-          if (valid) {
-            swal("匯款-成功！");
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-
-      addWithdrawalForm(){
-        this.step = 'addedWithdrawal';
-      }
-    },
-
-    mounted() {
-
+      // This is the maximum amount of money that can be transfered
+      maxAmount: 5000,
+      step: 'addWithdrawal',
     }
-  }
-</script>
-<style rel="stylesheet/scss" lang="scss" scoped>
+  },
 
+  created() {
+    this.transferMockF()
+  },
+
+  methods: {
+    transferMockF() {
+      this.transferMockItems=transferMock.transferMock
+    },
+
+    showMoreVenues(){
+      this.venuesToShow += 4;
+    },
+
+    transferAmountF(amount){
+      this.transferAmountForm.transferAmount = amount + ".00";
+    },
+
+    transferMaxAmount(){
+      this.transferAmountForm.transferAmount = this.maxAmount + ".00";
+    },
+
+    submitTransferMoney(){
+      this.$refs.transferAmountForm.validate((valid) => {
+        if (valid) {
+          swal("匯款-成功！");
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
+    addWithdrawalForm(){
+      this.step = 'addedWithdrawal';
+    }
+  },
+}
+</script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
 .transfer-main-container{
   width: 100%;
   height: 100%;
@@ -312,6 +291,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding-left: 6vw;
+
     img{
       height: 5.5vw;
       width: auto;
@@ -488,10 +468,6 @@ export default {
     }
   }
 
-  .withdrawal-bank-right{
-
-  }
-
   .transfer-amounts-container{
     width: 87vw;
     display: flex;
@@ -610,7 +586,6 @@ export default {
     }
   }
 }
-
 </style>
 
 <style scoped>

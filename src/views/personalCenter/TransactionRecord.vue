@@ -9,42 +9,42 @@
 
           <el-collapse-item name="1">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/deposit-history.png" alt="" width="100%" height="100%"><span class="transaction-record-header-title">存款记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/deposit-history.png" alt="" width="100%" height="100%"><span class="transaction-record-header-title">存款记录</span>
             </template>
             <div>存款记录-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="2">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/withdrawal-records.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">提款记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/withdrawal-records.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">提款记录</span>
             </template>
             <div>提款记录-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="3">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/transfer-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">转账记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/transfer-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">转账记录</span>
             </template>
             <div>转账记录-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="4">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/account-change-records.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">帐变记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/account-change-records.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">帐变记录</span>
             </template>
             <div>帐变记录-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="5">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/refer-a-friend-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">推荐好友记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/refer-a-friend-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">推荐好友记录</span>
             </template>
             <div>推荐好友记录-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="6">
             <template slot="title">
-                <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/rescue-gold-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">救援金记录</span>
+              <img class="transaction-record-header-images" src="../../assets/images/transactionrecord/rescue-gold-record.png" alt="" width="auto" height="20vw"><span class="transaction-record-header-title">救援金记录</span>
             </template>
             <div>救援金记录-內容</div>
           </el-collapse-item>
@@ -64,32 +64,21 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'TransactionRecord',
-    data() {
-      return {
-        activeName: ''
-      }
-    },
 
-    computed: {
-
-    },
-
-    methods: {
-
-    },
-
-    mounted() {
-
+  data() {
+    return {
+      activeName: ''
     }
-  }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .transaction-record-main-container{
   width: 100%;
   height: 100%;
@@ -121,7 +110,6 @@ export default {
     height: 5.5vw;
   }
 }
-
 </style>
 
 <style scoped>

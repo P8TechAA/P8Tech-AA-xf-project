@@ -18,74 +18,71 @@
     </div>
 
     <div class="games-main-container">
-
-    <div v-if="activeItem =='slotmachine'">
-      <div class="game-console-search-bar-container">
-           <input type="text" v-model="searchSlotGames" placeholder="请输入关键字" />
+      <div v-if="activeItem =='slotmachine'">
+        <div class="game-console-search-bar-container">
+          <input type="text" v-model="searchSlotGames" placeholder="请输入关键字" />
           <div class="game-console-search-bar">
-              <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
-              <span>搜索</span>
+            <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
+            <span>搜索</span>
           </div>
-      </div>
+        </div>
 
-      <div class="game-console-scrollable-container">
-        <div class="game-console-game-cards-container">
-            <div class="game-console-cards-inner-container" v-if="tableGameOneItems.length">
-              <div class="game-console-images-text-container" v-for="game in gamesListOne" :key="game.id">
+        <div class="game-console-scrollable-container">
+          <div class="game-console-game-cards-container">
+              <div class="game-console-cards-inner-container" v-if="tableGameOneItems.length">
+                <div class="game-console-images-text-container" v-for="game in gamesListOne" :key="game.id">
                   <img :src="game.gameImage" alt="" width="100%" height="100%">
                   <span>{{game.gameTitle}}</span>
+                </div>
               </div>
-            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div v-if="activeItem =='tablegames'">
-      <div class="game-console-search-bar-container">
-           <input type="text" v-model="searchTableGameOne" placeholder="请输入关键字" />
+      <div v-if="activeItem =='tablegames'">
+        <div class="game-console-search-bar-container">
+          <input type="text" v-model="searchTableGameOne" placeholder="请输入关键字" />
           <div class="game-console-search-bar">
-              <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
-              <span>搜索</span>
+            <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
+            <span>搜索</span>
           </div>
-      </div>
+        </div>
 
-      <div class="game-console-scrollable-container">
-        <div class="game-console-game-cards-container">
+        <div class="game-console-scrollable-container">
+          <div class="game-console-game-cards-container">
             <div class="game-console-cards-inner-container" v-if="tableGameOneItems.length">
               <div class="game-console-images-text-container" v-for="game in gamesListTwo" :key="game.id">
-                  <img :src="game.gameImage" alt="" width="100%" height="100%">
-                  <span>{{game.gameTitle}}</span>
+                <img :src="game.gameImage" alt="" width="100%" height="100%">
+                <span>{{game.gameTitle}}</span>
               </div>
             </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div v-if="activeItem =='tablegames2'">
-      <div class="game-console-search-bar-container">
-           <input type="text" v-model="searchTableGameTwo" placeholder="请输入关键字" />
+      <div v-if="activeItem =='tablegames2'">
+        <div class="game-console-search-bar-container">
+          <input type="text" v-model="searchTableGameTwo" placeholder="请输入关键字" />
           <div class="game-console-search-bar">
-              <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
-              <span>搜索</span>
+            <img src="../../assets/images/gameconsole/search-icon.png" alt="" width="100%" height="100%">
+            <span>搜索</span>
           </div>
-      </div>
+        </div>
 
-      <div class="game-console-scrollable-container">
-        <div class="game-console-game-cards-container">
+        <div class="game-console-scrollable-container">
+          <div class="game-console-game-cards-container">
             <div class="game-console-cards-inner-container" v-if="tableGameTwoItems.length">
               <div class="game-console-images-text-container" v-for="game in gamesListThree" :key="game.id">
-                  <img :src="game.gameImage" alt="" width="100%" height="100%">
-                  <span>{{game.gameTitle}}</span>
+                <img :src="game.gameImage" alt="" width="100%" height="100%">
+                <span>{{game.gameTitle}}</span>
               </div>
             </div>
+          </div>
         </div>
       </div>
-    </div>
-
     </div>
 
     <xf-footer :footerGameConsole="footerGameConsoleActive"></xf-footer>
-
   </div>
 </template>
 
@@ -95,114 +92,114 @@ import Footer from '../../components/Footer.vue'
 
 var Mock = require('mockjs');
 const Random = Mock.Random;
-
 const slotMachineMock = Mock.mock({
-    "slotMachine|60": [
-      {
-        id: '@id',
-        gameTitle: "@word",
-        gameImage: "@image('100x130', '#FFFFFF', 'Slot Machine')"
-      }
-    ],
+  "slotMachine|60": [
+    {
+      id: '@id',
+      gameTitle: "@word",
+      gameImage: "@image('100x130', '#FFFFFF', 'Slot Machine')"
+    }
+  ],
 
-    "tableGameOne|60": [
-      {
-        id: '@id',
-        gameTitle: "@word",
-        gameImage: "@image('100x130', '#FFFFFF', 'Table Game')"
-      }
-    ],
+  "tableGameOne|60": [
+    {
+      id: '@id',
+      gameTitle: "@word",
+      gameImage: "@image('100x130', '#FFFFFF', 'Table Game')"
+    }
+  ],
 
-    "tableGameTwo|60": [
-      {
-        id: '@id',
-        gameTitle: "@word",
-        gameImage: "@image('100x130', '#FFFFFF', 'Table Game 2')"
-      }
-    ],
-   });
+  "tableGameTwo|60": [
+    {
+      id: '@id',
+      gameTitle: "@word",
+      gameImage: "@image('100x130', '#FFFFFF', 'Table Game 2')"
+    }
+  ],
+});
 
 console.log(JSON.stringify(slotMachineMock, null, 4));
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'GameConsole',
-    data() {
-      return {
-        activeItem: 'slotmachine',
-        searchSlotGames: null,
-        searchTableGameOne: null,
-        searchTableGameTwo: null,
-        gameConsoleGame: 'slotMachine',
+    
+  data() {
+    return {
+      activeItem: 'slotmachine',
+      searchSlotGames: null,
+      searchTableGameOne: null,
+      searchTableGameTwo: null,
+      gameConsoleGame: 'slotMachine',
 
-        footerGameConsoleActive: true,
+      footerGameConsoleActive: true,
 
-        slotMachineItems:[],
-        tableGameOneItems:[],
-        tableGameTwoItems:[],
+      slotMachineItems:[],
+      tableGameOneItems:[],
+      tableGameTwoItems:[],
 
+    }
+  },
+
+  computed: {
+    gamesListOne(){
+      if(this.searchSlotGames){
+        return this.slotMachineItems.filter((game)=>{
+          return this.searchSlotGames.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
+        })
+      }else{
+        return this.slotMachineItems;
       }
     },
 
-    computed: {
-        gamesListOne(){
-        if(this.searchSlotGames){
-          return this.slotMachineItems.filter((game)=>{
-            return this.searchSlotGames.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
-          })
-        }else{
-          return this.slotMachineItems;
-        }
-      },
-
-      gamesListTwo(){
-        if(this.searchTableGameOne){
-          return this.tableGameOneItems.filter((game)=>{
-            return this.searchTableGameOne.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
-          })
-        }else{
-          return this.tableGameOneItems;
-        }
-      },
-
-      gamesListThree(){
-        if(this.searchTableGameTwo){
-          return this.tableGameTwoItems.filter((game)=>{
-            return this.searchTableGameTwo.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
-          })
-        }else{
-          return this.tableGameTwoItems;
-        }
+    gamesListTwo(){
+      if(this.searchTableGameOne){
+        return this.tableGameOneItems.filter((game)=>{
+          return this.searchTableGameOne.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
+        })
+      }else{
+        return this.tableGameOneItems;
       }
     },
 
-    methods: {
-      slotMachineDataF() {
-        this.slotMachineItems=slotMachineMock.slotMachine
-        this.tableGameOneItems=slotMachineMock.tableGameOne
-        this.tableGameTwoItems=slotMachineMock.tableGameTwo
-      },
+    gamesListThree(){
+      if(this.searchTableGameTwo){
+        return this.tableGameTwoItems.filter((game)=>{
+          return this.searchTableGameTwo.toLowerCase().split(' ').every(v => game.gameTitle.toLowerCase().includes(v))
+        })
+      }else{
+        return this.tableGameTwoItems;
+      }
+    }
+  },
 
-      isActive(menuItem) {
-        return this.activeItem === menuItem
-      },
-
-      setActive(menuItem) {
-        this.activeItem = menuItem
-      },
+  methods: {
+    slotMachineDataF() {
+      this.slotMachineItems=slotMachineMock.slotMachine
+      this.tableGameOneItems=slotMachineMock.tableGameOne
+      this.tableGameTwoItems=slotMachineMock.tableGameTwo
     },
 
-    created() {
-      this.slotMachineDataF()
+    isActive(menuItem) {
+      return this.activeItem === menuItem
     },
-  }
+
+    setActive(menuItem) {
+      this.activeItem = menuItem
+    },
+  },
+
+  created() {
+    this.slotMachineDataF()
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .game-console-main-container{
   width: 100%;
   height: 100%;
@@ -220,8 +217,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     background-color:  #131724;
-    padding: 0vw 5vw;
-    // background-color: green;    
+    padding: 0vw 5vw;    
   }
 
   .game-console-categories-inner{
@@ -328,12 +324,12 @@ export default {
   }
 
   .game-console-scrollable-container{
-      position: relative;
-      width: 93%;
-      margin: 0vw auto 15vw;
-      display: flex;
-      flex-wrap: wrap;
-      padding-top: 13vw;
+    position: relative;
+    width: 93%;
+    margin: 0vw auto 15vw;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 13vw;
   }
 
   .game-console-game-cards-container{
@@ -375,9 +371,7 @@ export default {
       word-break: break-all;
     }
   }
-
 }
-
 </style>
 
 <style scoped>

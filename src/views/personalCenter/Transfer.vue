@@ -4,12 +4,11 @@
     <xf-game-header headerTitlePassed="转账"></xf-game-header>
 
     <div class="transfer-scrollable-container">
-
       <div class="transfer-venues-container">
         <div class="transfer-venues-top">
           <div class="venues-central-wallet">
             <div class="central-wallet-image">
-                <img src="../../assets/images/transfer/central-wallet.png" alt="" width="100%" height="100%">
+              <img src="../../assets/images/transfer/central-wallet.png" alt="" width="100%" height="100%">
             </div>
 
             <div class="central-wallet-text">
@@ -52,13 +51,12 @@
         <div class="venues-venues-show-more" @click="showMoreVenues()">
           <span>显示所有场馆</span><img src="../../assets/images/games/arrow-down.png" alt="" width="100%" height="100%">
         </div>
-
       </div>
 
       <div class="transfer-transfer-container">
         <div class="transfer-transfer-top">
           <div class="transfer-central-wallet">
-              <span>中心钱包</span><img src="../../assets/images/games/filled-arrow-down.png" alt="" width="100%" height="100%">
+            <span>中心钱包</span><img src="../../assets/images/games/filled-arrow-down.png" alt="" width="100%" height="100%">
           </div>
 
           <div class="transfer-next-next">
@@ -66,25 +64,25 @@
           </div>
 
           <div class="transfer-bank-communication">
-              <span>交通银行</span><img src="../../assets/images/games/filled-arrow-down.png" alt="" width="100%" height="100%">
+            <span>交通银行</span><img src="../../assets/images/games/filled-arrow-down.png" alt="" width="100%" height="100%">
           </div>
         </div>
 
         <div class="transfer-amounts-container">
           <div class="transfer-amounts-inner">
-              <span @click="transferAmountF(100)">100</span>
+            <span @click="transferAmountF(100)">100</span>
           </div>
           <div class="transfer-amounts-inner">
-              <span @click="transferAmountF(500)">500</span>
+            <span @click="transferAmountF(500)">500</span>
           </div>
           <div class="transfer-amounts-inner">
-              <span @click="transferAmountF(1000)">1000</span>
+            <span @click="transferAmountF(1000)">1000</span>
           </div>
           <div class="transfer-amounts-inner">
-              <span @click="transferAmountF(2000)">2000</span>
+            <span @click="transferAmountF(2000)">2000</span>
           </div>
           <div class="transfer-amounts-inner">
-              <span @click="transferAmountF(5000)">5000</span>
+            <span @click="transferAmountF(5000)">5000</span>
           </div>
         </div>
 
@@ -109,20 +107,17 @@
             </el-form-item>
           </el-form>
         </div>
-
       </div>
 
       <div class="transfer-money-button" @click="submitTransferMoney()">
         <span>立即转账</span>
       </div>
-
     </div>
 
     <xf-footer></xf-footer>
 
   </div>
 </template>
-
 
 <script>
 import Header from '../../components/Header.vue'
@@ -131,101 +126,84 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const transferMock = Mock.mock({
-    transferMock:{
-        "centralWallet|1-100.2": 100,
-        xxSportsLabel: "XX体育",
-        "xxSports|1-100.2": 100,
-        gamingLabel: "电竞",
-        "gaming|1-100.2": 100,
-        ptLabel: "PT",
-        "pt|1-100.2": 100,
-        mgLabel: "MG+",
-        "mg|1-100.2": 100,
-      }
-   });
+  transferMock:{
+    "centralWallet|1-100.2": 100,
+    xxSportsLabel: "XX体育",
+    "xxSports|1-100.2": 100,
+    gamingLabel: "电竞",
+    "gaming|1-100.2": 100,
+    ptLabel: "PT",
+    "pt|1-100.2": 100,
+    mgLabel: "MG+",
+    "mg|1-100.2": 100,
+  }
+});
 
 console.log(JSON.stringify(transferMock, null, 4));
 
 export default {
   components:{
-      'xf-footer': Footer,
-      'xf-game-header': Header
+    'xf-footer': Footer,
+    'xf-game-header': Header
   },
 
   name: 'Transfer',
-    data() {
-      return {
-        transferMockItems:{},
 
-        centralWalletAmount: 3333.333,
-        venues: [
-          {label: 'XX体育', amount: '0.00'},
-          {label: '电竞', amount: '0.00'},
-          {label: 'PT', amount: '0.00'},
-          {label: 'MG+', amount: '0.00'},
-          {label: 'XX体育', amount: '0.00'},
-          {label: '电竞', amount: '0.00'},
-          {label: 'PT', amount: '0.00'},
-          {label: 'MG+', amount: '0.00'},
-          {label: 'XX体育', amount: '0.00'},
+  data() {
+    return {
+      transferMockItems:{},
+      
+      transferAmountRules: {
+        transferAmount: [
+          { required: true, trigger: 'blur', message: '需要轉賬金額.' },
         ],
-
-        transferAmountRules: {
-          transferAmount: [
-            { required: true, trigger: 'blur', message: '需要轉賬金額.' },
-          ],
-        },
-
-        transferAmountForm:{
-            transferAmount: null,
-        },
-
-        venuesToShow: 4,
-
-        // This is the maximum amount of money that can be transfered
-        maxAmount: 5000,
-      }
-    },
-
-    created() {
-      this.transferMockF()
-    },
-
-    methods: {
-      transferMockF() {
-        this.transferMockItems=transferMock.transferMock
       },
 
-      showMoreVenues(){
-        this.venuesToShow += 4;
+      transferAmountForm:{
+        transferAmount: null,
       },
 
-      transferAmountF(amount){
-        this.transferAmountForm.transferAmount = amount + ".00";
-      },
-
-      transferMaxAmount(){
-        this.transferAmountForm.transferAmount = this.maxAmount + ".00";
-      },
-
-      submitTransferMoney(){
-        this.$refs.transferAmountForm.validate((valid) => {
-          if (valid) {
-            swal("匯款-成功！");
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      }
-    },
-
-    mounted() {
-
+      // This is the maximum amount of money that can be transfered
+      maxAmount: 5000,
     }
-  }
+  },
+
+  created() {
+    this.transferMockF()
+  },
+
+  methods: {
+    transferMockF() {
+      this.transferMockItems=transferMock.transferMock
+    },
+
+    showMoreVenues(){
+      this.venuesToShow += 4;
+    },
+
+    transferAmountF(amount){
+      this.transferAmountForm.transferAmount = amount + ".00";
+    },
+
+    transferMaxAmount(){
+      this.transferAmountForm.transferAmount = this.maxAmount + ".00";
+    },
+
+    submitTransferMoney(){
+      this.$refs.transferAmountForm.validate((valid) => {
+        if (valid) {
+          swal("匯款-成功！");
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    }
+  },
+}
 </script>
+
 <style rel="stylesheet/scss" lang="scss" scoped>
 
 .transfer-main-container{
@@ -276,6 +254,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding-left: 6vw;
+    
     img{
       height: 5.5vw;
       width: auto;
@@ -588,7 +567,6 @@ export default {
     }
   }
 }
-
 </style>
 
 <style scoped>

@@ -4,16 +4,17 @@
     <xf-game-header headerTitlePassed="客服"></xf-game-header>
 
     <div class="customer-service-scrollable-container">
-
       <div class="customer-service-banner">
         <img :src="customerServiceItems.customerServiceImg" alt="">
       </div>
 
       <div class="customer-service-info-container">
         <div class="cSWelcomeText">{{customerServiceItems.sentence1}}</div>
+        
         <div class="cSWebsite">
-        {{customerServiceItems.websiteText}}&nbsp;<a :href="customerServiceItems.websiteAddress" target="_blank">{{customerServiceItems.websiteAddress}}</a>
+          {{customerServiceItems.websiteText}}&nbsp;<a :href="customerServiceItems.websiteAddress" target="_blank">{{customerServiceItems.websiteAddress}}</a>
         </div>
+        
         <div class="cSDescription">{{customerServiceItems.customerServiceDescription}}</div>
       </div>
 
@@ -26,7 +27,6 @@
           <img :src="customerServiceItems.csBtn2Image" alt="">
           <span>{{customerServiceItems.csBtn2Text}}</span>
       </div>
-
     </div>
 
     <xf-footer :footerCustomerService="footerCustomerServiceActive"></xf-footer>
@@ -42,19 +42,19 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 
 const customerServiceMock = Mock.mock({
-    "customerServiceData":{
-        id: "@id",
-        customerServiceImg: "@image('200x45','#4A7BF7','Image')",
-        sentence1: "@sentence(1)",
-        websiteText: "我们的官网是",
-        websiteAddress: "@url",
-        customerServiceDescription: "@paragraph(1)",
-        csBtn1Image:"@image('50x50','#fefefe','Button')",
-        csBtn1Text:"联系QQ",
-        csBtn2Image:"@image('50x50','#fefefe','Button')",
-        csBtn2Text:"在线客服",
-      }
-   });
+  "customerServiceData":{
+    id: "@id",
+    customerServiceImg: "@image('200x45','#4A7BF7','Image')",
+    sentence1: "@sentence(1)",
+    websiteText: "我们的官网是",
+    websiteAddress: "@url",
+    customerServiceDescription: "@paragraph(1)",
+    csBtn1Image:"@image('50x50','#fefefe','Button')",
+    csBtn1Text:"联系QQ",
+    csBtn2Image:"@image('50x50','#fefefe','Button')",
+    csBtn2Text:"在线客服",
+  }
+});
 
 console.log(JSON.stringify(customerServiceMock, null, 4));
 
@@ -85,7 +85,6 @@ export default {
 }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-
 .customer-service-main-container{
   width: 100%;
   height: 100%;
@@ -224,14 +223,11 @@ export default {
     cursor: pointer;
   }
 }
-
 </style>
 
 <style scoped>
-
   body,html{
     width: 100%;
     height: 100%;
   }
-
 </style>

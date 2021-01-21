@@ -4,7 +4,6 @@
     <xf-game-header headerTitlePassed="写信"></xf-game-header>
 
     <div class="write-a-letter-scrollable-container">
-
       <div class="write-a-letter-container">
         <div class="write-a-letter-top">
           <span class="write-a-letter-top-title">标题</span>
@@ -20,7 +19,6 @@
               <el-dropdown-item command="快捷输入 3">快捷输入 3</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-
         </div>
 
         <el-form ref="titleForm" :model="titleForm" :rules="titleRules">
@@ -57,8 +55,6 @@
       <div class="write-a-letter-send-button" @click="sendLetter">
           <span>发送</span>
       </div>
-
-
     </div>
 
     <xf-footer></xf-footer>
@@ -72,72 +68,61 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'PromotionsTransferMoney',
-    data() {
-      return {
-        titleForm: {
-          lettertitle: '',
-        },
 
-        contentForm: {
-          lettercontent: '',
-        },
-
-        titleRules: {
-          lettertitle: [{ required: true, trigger: 'blur', message: '標題為必填項.' }],
-        },
-
-        contentRules: {
-          lettercontent: [{ required: true, trigger: 'blur', message: '內容為必填項.' }],
-        },
-      }
-    },
-
-    computed: {
-
-    },
-
-    methods: {
-      handleCommand(command) {
-        this.titleForm.lettertitle = command;
-        this.contentForm.lettercontent = command;
+  data() {
+    return {
+      titleForm: {
+        lettertitle: '',
       },
 
-      sendLetter(){
-        this.$refs.titleForm.validate((valid) => {
-          if (valid) {
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-        this.$refs.contentForm.validate((valid) => {
-          if (valid) {
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+      contentForm: {
+        lettercontent: '',
       },
-    },
 
-    watch: {
+      titleRules: {
+        lettertitle: [{ required: true, trigger: 'blur', message: '標題為必填項.' }],
+      },
 
-    },
-
-    mounted() {
-
+      contentRules: {
+        lettercontent: [{ required: true, trigger: 'blur', message: '內容為必填項.' }],
+      },
     }
-  }
-</script>
-<style rel="stylesheet/scss" lang="scss" scoped>
+  },
 
+  methods: {
+    handleCommand(command) {
+      this.titleForm.lettertitle = command;
+      this.contentForm.lettercontent = command;
+    },
+
+    sendLetter(){
+      this.$refs.titleForm.validate((valid) => {
+        if (valid) {
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+      this.$refs.contentForm.validate((valid) => {
+        if (valid) {
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+  },
+}
+</script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
 .write-a-letter-main-container{
   width: 100%;
   height: 100%;
@@ -291,11 +276,9 @@ export default {
   	color: #ffffff;
   }
 }
-
 </style>
 
 <style scoped>
-
 .write-a-letter-container >>> .el-textarea__inner{
   width: 84vw;
   margin: 2.5vw auto 0vw;
@@ -338,5 +321,4 @@ export default {
   color: #33bcd4;
   line-height: 6vw;
 }
-
 </style>

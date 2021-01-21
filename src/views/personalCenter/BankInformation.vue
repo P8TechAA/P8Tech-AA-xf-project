@@ -4,35 +4,34 @@
     <xf-game-header headerTitlePassed="银行信息"></xf-game-header>
 
     <div class="bank-information-scrollable-container">
-
       <div class="bank-information-container">
         <el-form :model="bankInformationForm" ref="bankInformationForm">
+          <el-form-item
+            v-for="(bankInfo, index) in bankInformationForm.bankInfos"
+            :key="bankInfo.key"
+            :prop="'bankInfos.' + index + '.value'"
+            :rules="{
+              required: true, message: '银行信息为必填项. ', trigger: 'blur'
+            }"
+          >
+          
+            <div class="bank-information-label">
+              <span>北京银行</span>
+              <div class="bank-information-border"></div>
+            </div>
 
-        <el-form-item
-          v-for="(bankInfo, index) in bankInformationForm.bankInfos"
-          :key="bankInfo.key"
-          :prop="'bankInfos.' + index + '.value'"
-          :rules="{
-            required: true, message: '银行信息为必填项. ', trigger: 'blur'
-          }"
-        >
-          <div class="bank-information-label">
-            <span>北京银行</span>
-            <div class="bank-information-border"></div>
-          </div>
-          <el-input v-model="bankInfo.value" placeholder="26533*****34">
-            <template slot="suffix">
-              <div class="untie-bank-information-container">
-                <div class="untie-bank-buttton" @click.prevent="removeDomain(bankInfo)">
-                  <span>解绑</span>
+            <el-input v-model="bankInfo.value" placeholder="26533*****34">
+              <template slot="suffix">
+                <div class="untie-bank-information-container">
+                  <div class="untie-bank-buttton" @click.prevent="removeDomain(bankInfo)">
+                    <span>解绑</span>
+                  </div>
                 </div>
-              </div>
-            </template>
-          </el-input>
-        </el-form-item>
-
-      </el-form>
-    </div>
+              </template>
+            </el-input>
+          </el-form-item>
+        </el-form>
+      </div>
 
       <div class="add-bank-card-button" @click="addDomain">
         <span>+添加银行卡</span>
@@ -41,13 +40,11 @@
       <div class="save-bank-card-button" @click="submitForm('bankInformationForm')">
         <span>保存银行信息</span>
       </div>
-
     </div>
+    
     <xf-footer></xf-footer>
-
   </div>
 </template>
-
 
 <script>
 import Header from '../../components/Header.vue'
@@ -55,61 +52,55 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-footer': Footer,
-      'xf-game-header': Header
+    'xf-footer': Footer,
+    'xf-game-header': Header
   },
 
   name: 'BankInformation',
-    data() {
-      return {
-        bankInformationForm: {
-          bankInfos: [{
-            key: 1,
-            value: ''
-          }],
-          email: ''
-        }
-      }
-    },
 
-    computed: {
-
-    },
-
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            swal("银行信息已保存.");
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      removeDomain(item) {
-        var index = this.bankInformationForm.bankInfos.indexOf(item);
-        if (index !== -1) {
-          this.bankInformationForm.bankInfos.splice(index, 1);
-        }
-      },
-      addDomain() {
-        this.bankInformationForm.bankInfos.push({
-          key: Date.now(),
+  data() {
+    return {
+      bankInformationForm: {
+        bankInfos: [{
+          key: 1,
           value: ''
-        });
+        }],
+        email: ''
+      }
+    }
+  },
+
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          swal("银行信息已保存.");
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
+    removeDomain(item) {
+      var index = this.bankInformationForm.bankInfos.indexOf(item);
+      if (index !== -1) {
+        this.bankInformationForm.bankInfos.splice(index, 1);
       }
     },
 
-
-    mounted() {
-
+    addDomain() {
+      this.bankInformationForm.bankInfos.push({
+        key: Date.now(),
+        value: ''
+      });
     }
-  }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .bank-information-main-container{
   width: 100%;
   height: 100%;
@@ -228,7 +219,6 @@ export default {
     }
   }
 }
-
 </style>
 
 <style scoped>

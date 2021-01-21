@@ -2,22 +2,22 @@
   <div class="vip-main-container">
 
     <div class="vip-scrollable-container">
-
       <div class="vip-top-container">
         <div class="vip-top-top">
-            <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
-            <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+          <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
+          <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
         </div>
 
         <swiper class="swiper" :options="swiperOption">
           <swiper-slide>
-              <img :src="vipMockItems.vipImageLeft" alt="" width="100%" height="100%">
-              <div class="vip-card-text">
-                <span class="vip-text-top">{{vipMockItems.vipLeftTextOne}}</span>
-                <span class="vip-text-mid">{{vipMockItems.vipLeftTextTwo}}</span>
-                <span class="vip-text-bottom">{{vipMockItems.vipLeftButton}}</span>
-              </div>
+            <img :src="vipMockItems.vipImageLeft" alt="" width="100%" height="100%">
+            <div class="vip-card-text">
+              <span class="vip-text-top">{{vipMockItems.vipLeftTextOne}}</span>
+              <span class="vip-text-mid">{{vipMockItems.vipLeftTextTwo}}</span>
+              <span class="vip-text-bottom">{{vipMockItems.vipLeftButton}}</span>
+            </div>
           </swiper-slide>
+
           <swiper-slide class="vip-swiper-image">
             <img :src="vipMockItems.vipImageRight" alt="" width="100%" height="100%">
             <div class="vip-card-text">
@@ -26,6 +26,7 @@
               <span class="vip-text-bottom">{{vipMockItems.vipRightButton}}</span>
             </div>
           </swiper-slide>
+
           <div class="swiper-button-prev" slot="button-prev"></div>
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
@@ -36,131 +37,126 @@
 
         <div class="progress-bar-bar">
           <div class="progress-label-vip1">
-            VIP1
+            VIP{{vipMockItems.vipPrevLevel}}
           </div>
+
           <div class="progress-percentage-container">
             <div class="progress-bar-progress-indicator" :style="{width:vipMockItems.balance+'%'}"></div>
           </div>
+
           <div class="progress-label-vip2">
-            VIP2
+            VIP{{vipMockItems.vipNextLevel}}
           </div>
         </div>
 
         <div class="progress-description">
-            您已完成{{vipMockItems.deposit}}存款和{{vipMockItems.turnover}}流水
+            您已完成&nbsp;{{vipMockItems.deposit}}&nbsp;存款和&nbsp;{{vipMockItems.turnover}}&nbsp;流水
         </div>
       </div>
 
       <section v-if="step == 'vip1'">
-
-      <div class="vip-privileges">
-        <div class="vip-privileges-mark"></div>
-        <span>VIP特权</span>
-      </div>
-
-      <div class="priviliges-row">
-        <div class="privileges-col1-img">
-          <img src="../../assets/images/vip/monthly-red-envelop.png" alt="" width="100%" height="100%">
+        <div class="vip-privileges">
+          <div class="vip-privileges-mark"></div>
+          <span>VIP特权</span>
         </div>
-        <span class="privileges-col2-text">每月红包</span>
-        <p class="privileges-col3-text">38<span class="privileges-col3-yuan">元</span></p>
-        <div class="privileges-col4-button">
-          <span>领取</span>
-        </div>
-      </div>
 
-      <div class="priviliges-row">
-        <div class="privileges-col1-img">
-          <img src="../../assets/images/vip/monthly-deposit.png" alt="" width="100%" height="100%">
-        </div>
-        <span class="privileges-col2-text">每月存送</span>
-        <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
-        <div class="privileges-col4-button">
-          <span>领取</span>
-        </div>
-      </div>
-
-      <div class="priviliges-row">
-        <div class="privileges-col1-img">
-          <img src="../../assets/images/vip/birthday-gift.png" alt="" width="100%" height="100%">
-        </div>
-        <span class="privileges-col2-text">生日礼金</span>
-        <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
-        <div class="privileges-col4-button">
-          <span>领取</span>
-        </div>
-      </div>
-
-      <div class="vip-privileges vip-privileges-add-margin">
-        <div class="vip-privileges-mark"></div>
-        <span>VIP特权</span>
-      </div>
-
-      <div class="privileges-data">
-
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.eSportsRebate}}%
+        <div class="priviliges-row">
+          <div class="privileges-col1-img">
+            <img src="../../assets/images/vip/monthly-red-envelop.png" alt="" width="100%" height="100%">
           </div>
-          <div class="priveleges-inner-label">
-            电竞返水
+          <span class="privileges-col2-text">每月红包</span>
+          <p class="privileges-col3-text">38<span class="privileges-col3-yuan">元</span></p>
+          <div class="privileges-col4-button">
+            <span>领取</span>
           </div>
         </div>
 
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.sportsRebate}}%
+        <div class="priviliges-row">
+          <div class="privileges-col1-img">
+            <img src="../../assets/images/vip/monthly-deposit.png" alt="" width="100%" height="100%">
           </div>
-          <div class="priveleges-inner-label">
-            体育返水
-          </div>
-        </div>
-
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.realityRebate}}%
-          </div>
-          <div class="priveleges-inner-label">
-            真人返水
+          <span class="privileges-col2-text">每月存送</span>
+          <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
+          <div class="privileges-col4-button">
+            <span>领取</span>
           </div>
         </div>
 
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.electronicRebate}}%
+        <div class="priviliges-row">
+          <div class="privileges-col1-img">
+            <img src="../../assets/images/vip/birthday-gift.png" alt="" width="100%" height="100%">
           </div>
-          <div class="priveleges-inner-label">
-            电子返水
-          </div>
-        </div>
-
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.fishingRebate}}%
-          </div>
-          <div class="priveleges-inner-label">
-            捕鱼返水
+          <span class="privileges-col2-text">生日礼金</span>
+          <p class="privileges-col3-text">588<span class="privileges-col3-yuan">元</span></p>
+          <div class="privileges-col4-button">
+            <span>领取</span>
           </div>
         </div>
 
-        <div class="priveleges-inner">
-          <div class="priveleges-inner-percentage">
-            {{vipMockItems.chessRebate}}%
-          </div>
-          <div class="priveleges-inner-label">
-            棋牌返水
-          </div>
+        <div class="vip-privileges vip-privileges-add-margin">
+          <div class="vip-privileges-mark"></div>
+          <span>VIP特权</span>
         </div>
 
-      </div>
-    </section>
-  </div>
+        <div class="privileges-data">
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.eSportsRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              电竞返水
+            </div>
+          </div>
 
-    <!-- <xf-footer></xf-footer> -->
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.sportsRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              体育返水
+            </div>
+          </div>
 
-  </div>
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.realityRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              真人返水
+            </div>
+          </div>
+
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.electronicRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              电子返水
+            </div>
+          </div>
+
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.fishingRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              捕鱼返水
+            </div>
+          </div>
+
+          <div class="priveleges-inner">
+            <div class="priveleges-inner-percentage">
+              {{vipMockItems.chessRebate}}%
+            </div>
+            <div class="priveleges-inner-label">
+              棋牌返水
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+ </div>
 </template>
-
 
 <script>
 import Footer from '../../components/Footer.vue'
@@ -168,30 +164,33 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const vipMock = Mock.mock({
-    vipMock:{
-        id: "@id",
-        vipImageLeft: "@image('100x60','#d6d6d6', 'VIP Image')",
-        vipLeftTextOne: ">存款量少20元可申请一次",
-        vipLeftTextTwo: ">晋级奖金18888元",
-        vipLeftButton: "立即申请",
-       
-        vipImageRight: '@image("100x60","#d6d6d6", "VIP Image")',
-        vipRighttTextOne: ">存款量少20元可申请一次",
-        vipRightTextTwo: ">晋级奖金18888元",
-        vipRightButton: "立即申请",
+  vipMock:{
+    id: "@id",
+    vipImageLeft: "@image('100x60','#d6d6d6', 'VIP Image')",
+    vipLeftTextOne: ">存款量少20元可申请一次",
+    vipLeftTextTwo: ">晋级奖金18888元",
+    vipLeftButton: "立即申请",
+    
+    vipImageRight: '@image("100x60","#d6d6d6", "VIP Image")',
+    vipRighttTextOne: ">存款量少20元可申请一次",
+    vipRightTextTwo: ">晋级奖金18888元",
+    vipRightButton: "立即申请",
 
-        "balance|1-100": 100,
-        "deposit|1-100.2": 100,
-        "turnover|1-100.2": 100,
+    vipPrevLevel: 1,
+    vipNextLevel: 2,
 
-        "eSportsRebate|1-100.2": 100,
-        "sportsRebate|1-100.2": 100,
-        "realityRebate|1-100.2": 100,
-        "electronicRebate|1-100.2": 100,
-        "fishingRebate|1-100.2": 100,
-        "chessRebate|1-100.2": 100,
-      }
-   });
+    "balance|1-100": 100,
+    "deposit|1-100.2": 100,
+    "turnover|1-100.2": 100,
+
+    "eSportsRebate|1-100.2": 100,
+    "sportsRebate|1-100.2": 100,
+    "realityRebate|1-100.2": 100,
+    "electronicRebate|1-100.2": 100,
+    "fishingRebate|1-100.2": 100,
+    "chessRebate|1-100.2": 100,
+    }
+});
 
 console.log(JSON.stringify(vipMock, null, 4));
 
@@ -201,64 +200,55 @@ export default {
   },
 
   name: 'VIP',
-    data() {
-      return {
-        vipMockItems:{},
 
-        vipPrivilegesStatus: true,
-        vipDetailsStatus: false,
-        progressBarPercentage: 60,
-        vipDeposit: 0.00,
-        vipTurnover: 0.00,
-        esportsRebate: 0.4,
-        sportsRebate: 0.4,
-        liveRebate: 0.4,
-        electronicRebate: 0.4,
-        fishingBackWatersRebate: 0.4,
-        chessCardRebate: 0.4,
-        step: 'vip1',
+  data() {
+    return {
+      vipMockItems:{},
 
-        swiperOption: {
-          loop: true,
-          speed: 1000,
-          autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
+      vipPrivilegesStatus: true,
+      vipDetailsStatus: false,
+      step: 'vip1',
+
+      swiperOption: {
+        loop: true,
+        speed: 1000,
+        autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
         },
-      }
-    },
-
-    created() {
-      this.vipMockF()
-    },
-
-    methods: {
-      
-      vipMockF() {
-        this.vipMockItems=vipMock.vipMock
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       },
+    }
+  },
 
-      privilegesTab(){
-        this.step = 'vip1'
-        this.vipPrivilegesStatus = true,
-        this.vipDetailsStatus = false
-      },
+  created() {
+    this.vipMockF()
+  },
 
-      detailsTab(){
-        this.step = 'vip2'
-        this.vipPrivilegesStatus = false,
-        this.vipDetailsStatus = true
-      }
+  methods: {
+    vipMockF() {
+      this.vipMockItems=vipMock.vipMock
     },
+
+    privilegesTab(){
+      this.step = 'vip1'
+      this.vipPrivilegesStatus = true,
+      this.vipDetailsStatus = false
+    },
+
+    detailsTab(){
+      this.step = 'vip2'
+      this.vipPrivilegesStatus = false,
+      this.vipDetailsStatus = true
+    }
   }
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .vip-main-container{
   width: 100%;
   height: 100%;
@@ -571,11 +561,9 @@ export default {
     margin: 0vw 7vw 7vw;
   }
 }
-
 </style>
 
 <style scoped>
-
   body,html{
     width: 100%;
     height: 100%;

@@ -90,42 +90,45 @@
       </ul>
     </div>
 
-    <div class="scrollable-content">
-        <div class="scroll-area">
-        
-        <div class="eSportsContainer"  id="eSportsContainer" ref="eSportsContainer">
-          <div v-for="i in eSportItems" :key="i.id">
-            <img :src="i.image" alt="" width="100%" height="100%">
-          </div>
-        </div>
-        
-        <div class="physicalEducationContainer" id="physicalEducationContainer" ref="physicalEducationContainer">
-          <div v-for="i in physicalEducationItems" :key="i.id">
-            <img :src="i.image" alt="" width="100%" height="100%">
-          </div>
-        </div>
-
-        <div v-for="i in realPersonItems" :key="i.id" class="realPersonContainer" ref="realPersonContainer" id="realPersonContainer">
+    <div class="scrollable-content" @scroll="scrollerF" ref="homeScrollerContainer">
+      <div class="eSportsContainer" id="eSportsContainer" ref="eSportsContainer">
+        <div v-for="i in eSportItems" :key="i.id">
           <img :src="i.image" alt="" width="100%" height="100%">
         </div>
-
-        <div v-for="i in chessItems" :key="i.id" class="chessContainer" ref="chessContainer" id="chessContainer">
+      </div>
+  
+      <div class="physicalEducationContainer" id="physicalEducationContainer" ref="physicalEducationContainer">
+        <div v-for="i in physicalEducationItems" :key="i.id">
           <img :src="i.image" alt="" width="100%" height="100%">
         </div>
-
-        <div v-for="i in fishingItems" :key="i.id" class="fishingContainer" ref="fishingContainer" id="fishingContainer">
+      </div>
+  
+      <div class="realPersonContainer" id="realPersonContainer" ref="realPersonContainer">
+        <div v-for="i in realPersonItems" :key="i.id">
           <img :src="i.image" alt="" width="100%" height="100%">
         </div>
+      </div>
 
-        <div class="videoGamesContainer" id="videoGamesContainer">
-          <div v-for="i in videoGamesItems" :key="i.id" ref="videoGamesContainer">
-            <img :src="i.image" alt="" width="100%" height="100%">
-          </div>
+      <div class="chessContainer" id="chessContainer" ref="chessContainer">
+        <div v-for="i in chessItems" :key="i.id">
+          <img :src="i.image" alt="" width="100%" height="100%">
+        </div>
+      </div>
+
+      <div class="fishingContainer" id="fishingContainer" ref="fishingContainer">
+        <div v-for="i in fishingItems" :key="i.id">
+          <img :src="i.image" alt="" width="100%" height="100%">
+        </div>
+      </div>
+
+      <div class="videoGamesContainer" id="videoGamesContainer" ref="videoGamesContainer">
+        <div v-for="i in videoGamesItems" :key="i.id">
+          <img :src="i.image" alt="" width="100%" height="100%">
         </div>
       </div>
     </div>
-
-      <xf-footer :footerHome="footerHomeActive"></xf-footer>
+    
+    <xf-footer :footerHome="footerHomeActive"></xf-footer>
 
   </div>
 </template>
@@ -151,42 +154,42 @@ const homepageMock = Mock.mock({
       }
     ],
 
-    "eSports|6": [
+    "eSports|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Esports")'
       }
     ],
 
-    "physicalEducation|6": [
+    "physicalEducation|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Physical Education")'
       }
     ],
 
-    "realPerson|6": [
+    "realPerson|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Real Person")'
       }
     ],
 
-    "chess|6": [
+    "chess|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Chess")'
       }
     ],
 
-    "fishing|6": [
+    "fishing|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Fishing")'
       }
     ],
 
-    "videoGames|6": [
+    "videoGames|10": [
       {
         "id|+1": "@id",
         "image":'@image("200x50", "#d6d6d6", "#000000", "Video Games")'
@@ -198,100 +201,115 @@ const homepageMock = Mock.mock({
         "welcomeText": "欢迎您，亲爱的用户",
         "loginNote": "请先登录",
       },
-    
   });
 
 console.log(JSON.stringify(homepageMock, null, 4));
 
 export default {
-    components:{
-        'xf-footer': Footer
-    },
-
-    name: 'carrousel',
-    data() {
-      return {
-        swiperOptions: {
-          loop: true,
-          speed: 1000,
-          autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-          },
-          pagination: {
-            el: '.swiper-pagination'
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
+  components:{
+      'xf-footer': Footer
+  },
+  
+  name: 'carrousel',
+  
+  data() {
+    return {
+      swiperOptions: {
+        loop: true,
+        speed: 1000,
+        autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
         },
-
-        settings: {
-        maxScrollbarLength: 60
+        pagination: {
+          el: '.swiper-pagination'
         },
-
-        footerHomeActive: true,
-
-        slideshowImages:[],
-        newsTickerItems:[],
-        eSportsItems:[],
-        physicalEducationItems:[],
-        realPersonItems:[],
-        chessItems:[],
-        fishingItems:[],
-        videoGamesItems:[],
-
-        homepageTexts:{},
-
-        activeItem: 'eSports',
-      }
-    },
-
-    created() {
-      this.homepageDataF()
-    },
-
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
-
-    methods: {
-      homepageDataF() {
-        this.slideshowImages=homepageMock.slideshowImages;
-        this.newsTickerItems=homepageMock.newsTicker;
-        this.eSportItems=homepageMock.eSports;
-        this.physicalEducationItems=homepageMock.physicalEducation;
-        this.realPersonItems=homepageMock.realPerson;
-        this.chessItems=homepageMock.chess;
-        this.fishingItems=homepageMock.fishing;
-        this.videoGamesItems=homepageMock.videoGames;
-        this.homepageTexts=homepageMock.homepageTexts;
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       },
 
-      isActive(menuItem) {
-        return this.activeItem === menuItem
+      settings: {
+      maxScrollbarLength: 60
       },
 
-      setActive(menuItem) {
-        this.activeItem = menuItem
-      },
+      footerHomeActive: true,
 
-    },
+      slideshowImages:[],
+      newsTickerItems:[],
+      eSportsItems:[],
+      physicalEducationItems:[],
+      realPersonItems:[],
+      chessItems:[],
+      fishingItems:[],
+      videoGamesItems:[],
+      homepageTexts:{},
 
-    mounted() {
-      
+      activeItem: 'eSports',
     }
-  }
+  },
+
+  created() {
+    this.homepageDataF()
+  },
+
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.$swiper
+    },
+  },
+
+  methods: {
+    scrollerF(){
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.eSportsContainer.offsetTop)-5)){
+        this.activeItem = "eSports"
+      }
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.physicalEducationContainer.offsetTop)-5)){
+        this.activeItem = "physicalEduc"
+      }
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.realPersonContainer.offsetTop)-5)){
+        this.activeItem = "realPerson"
+      }
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.chessContainer.offsetTop)-5)){
+        this.activeItem = "chess"
+      }
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.fishingContainer.offsetTop)-5)){
+        this.activeItem = "fishing"
+      }
+      if(this.$refs.homeScrollerContainer.scrollTop >= ((this.$refs.videoGamesContainer.offsetTop)-5)){
+        this.activeItem = "videogames"
+      }
+    },
+
+    homepageDataF() {
+      this.slideshowImages=homepageMock.slideshowImages;
+      this.newsTickerItems=homepageMock.newsTicker;
+      this.eSportItems=homepageMock.eSports;
+      this.physicalEducationItems=homepageMock.physicalEducation;
+      this.realPersonItems=homepageMock.realPerson;
+      this.chessItems=homepageMock.chess;
+      this.fishingItems=homepageMock.fishing;
+      this.videoGamesItems=homepageMock.videoGames;
+      this.homepageTexts=homepageMock.homepageTexts;
+    },
+
+    isActive(menuItem) {
+      return this.activeItem === menuItem
+    },
+
+    setActive(menuItem) {
+      this.activeItem = menuItem
+    },
+  },
+}
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-
 .home-main-container{
   width: 100%;
   height: 100%;
   position: relative;
+  overflow-y: hidden;
 
   .home-slideshow-main-container{
     width: 100%;
@@ -308,7 +326,6 @@ export default {
     background-color: rgba(53, 55, 72, 0.8);
     z-index: 200;
     border-radius: 2vw 2vw 0vw 0vw;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -490,7 +507,6 @@ export default {
     	letter-spacing: 0px;
       color: #bacef1;
       padding: 2vw 2vw;
-      // background-color: pink;
     }
 
     li:hover{
@@ -500,6 +516,11 @@ export default {
     a{
       text-decoration: none;
       color: inherit;
+      outline: none;
+    }
+
+    a:active {
+      background-color: transparent;
     }
 
     .navigationActive{
@@ -512,38 +533,26 @@ export default {
   }
 
   .scrollable-content{
-    position: absolute;
-    top: 0vw;
-    right: 0vw;
-    bottom: 0vw;
-    left: 0vw;
-    height: 100%;
+    position: relative;
+    height: 52%;
     width: 100%;
     overflow-y: auto;
-    // padding-top: 85vw;
-    // padding-bottom: 12vw;
-  }
-
-  .scroll-area {
-    position: relative;
-    width: 93%;
-    margin: 0 auto;
+    scroll-behavior: smooth;
+    padding-top: 2vw;
+    padding-bottom: 10vw;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
 
     img{
-      width: 100%;
+      width: 95vw;
       height: auto;
       border-radius: 1vw;
     }
   }
-
-  .eSportsContainer{
-    padding-top: 85vw;
-  }
-
-  .videoGamesContainer{
-    padding-bottom: 12vw;
-  }
-
 }
 </style>
 

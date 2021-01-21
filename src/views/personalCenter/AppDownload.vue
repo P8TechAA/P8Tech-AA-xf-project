@@ -4,7 +4,6 @@
     <xf-game-header headerTitlePassed="下载"></xf-game-header>
 
     <div class="download-scrollable-container">
-
       <div class="download-navigation-container">
         <div class="download-navigation-left" :class="{activeNavigation:androidNavStatus}" @click="androidTabF()">
           <span>安卓系统</span>
@@ -16,67 +15,57 @@
       </div>
 
       <section v-if="step=='android'">
+        <div v-for="i in appAndroidDownloadItems" :key="i.id">
+          <div class="download-containers">
+            <div class="download-logo">
+              <img :src="i.image" alt="" width="100%" height="100%">
+            </div>
+            
+            <div class="download-desc">
+              <div class="download-desc-top">
+                {{i.downloadDescOne}}
+              </div>
+              <div class="download-desc-bottom">
+                {{i.downloadDescTwo}}
+              </div>
+            </div>
 
-         <div v-for="i in appAndroidDownloadItems" :key="i.id">
-            <div class="download-containers">
-              <div class="download-logo">
-                <img :src="i.image" alt="" width="100%" height="100%">
-              </div>
-              
-              <div class="download-desc">
-                <div class="download-desc-top">
-                  {{i.downloadDescOne}}
-                </div>
-                <div class="download-desc-bottom">
-                  {{i.downloadDescTwo}}
-                </div>
-              </div>
-
-              <div class="download-button" @click="androidDownloadF()">
-                <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-                <span>下载</span>
-              </div>
+            <div class="download-button" @click="androidDownloadF()">
+              <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
+              <span>下载</span>
+            </div>
           </div>
         </div>
-
-        
-
       </section>
-
 
       <section v-if="step=='apple'">
-
         <div v-for="i in appAppleDownloadItems" :key="i.id">
-            <div class="download-containers">
-              <div class="download-logo">
-                <img :src="i.image" alt="" width="100%" height="100%">
+          <div class="download-containers">
+            <div class="download-logo">
+              <img :src="i.image" alt="" width="100%" height="100%">
+            </div>
+            
+            <div class="download-desc">
+              <div class="download-desc-top">
+                {{i.downloadDescOne}}
               </div>
-              
-              <div class="download-desc">
-                <div class="download-desc-top">
-                  {{i.downloadDescOne}}
-                </div>
-                <div class="download-desc-bottom">
-                  {{i.downloadDescTwo}}
-                </div>
+              <div class="download-desc-bottom">
+                {{i.downloadDescTwo}}
               </div>
+            </div>
 
-              <div class="download-button" @click="androidDownloadF()">
-                <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
-                <span>下载</span>
-              </div>
+            <div class="download-button" @click="androidDownloadF()">
+              <img src="../../assets/images/download/download.png" alt="" width="100%" height="100%">
+              <span>下载</span>
+            </div>
           </div>
         </div>
-
       </section>
-
     </div>
 
     <xf-footer></xf-footer>
-
   </div>
 </template>
-
 
 <script>
 import Header from '../../components/Header.vue'
@@ -85,79 +74,79 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const appDownloadMock = Mock.mock({
-    "downloadAndroidMock|2-6":[
-      {
-        id: "@id",
-        downloadDescOne: "@word",
-        downloadDescTwo: "@word",
-        "image":'@image("20x20", "#d6d6d6", "#000000", "logo")'
-      }
-      ],
+  "downloadAndroidMock|2-6":[
+    {
+      id: "@id",
+      downloadDescOne: "@word",
+      downloadDescTwo: "@word",
+      "image":'@image("20x20", "#d6d6d6", "#000000", "logo")'
+    }
+  ],
 
-      "downloadAppleMock|2-6":[
-      {
-        id: "@id",
-        downloadDescOne: "@word",
-        downloadDescTwo: "@word",
-        "image":'@image("50x50", "#d6d6d6", "#000000", "logo")'
-      }
-      ],
-   });
+  "downloadAppleMock|2-6":[
+    {
+      id: "@id",
+      downloadDescOne: "@word",
+      downloadDescTwo: "@word",
+      "image":'@image("50x50", "#d6d6d6", "#000000", "logo")'
+    }
+  ],
+});
 
 console.log(JSON.stringify(appDownloadMock, null, 4));
 
 export default {
   components:{
-      'xf-footer': Footer,
-      'xf-game-header': Header
+    'xf-footer': Footer,
+    'xf-game-header': Header
   },
 
   name: 'FishingGame',
-    data() {
-      return {
-        androidNavStatus: true,
-        appleNavStatus: false,
-        step: 'android',
-        appAndroidDownloadItems:[],
-        appAppleDownloadItems:[],
-      }
+
+  data() {
+    return {
+      androidNavStatus: true,
+      appleNavStatus: false,
+      step: 'android',
+      appAndroidDownloadItems:[],
+      appAppleDownloadItems:[],
+    }
+  },
+
+  created() {
+    this.appDownloadDataF()
+  },
+
+  methods: {
+    appDownloadDataF() {
+      this.appAndroidDownloadItems=appDownloadMock.downloadAndroidMock
+        this.appAppleDownloadItems=appDownloadMock.downloadAppleMock
     },
 
-     created() {
-      this.appDownloadDataF()
+    androidTabF(){
+      this.androidNavStatus = true,
+      this.appleNavStatus = false,
+      this.step = 'android'
     },
 
-    methods: {
-      appDownloadDataF() {
-        this.appAndroidDownloadItems=appDownloadMock.downloadAndroidMock
-         this.appAppleDownloadItems=appDownloadMock.downloadAppleMock
-      },
-
-      androidTabF(){
-        this.androidNavStatus = true,
-        this.appleNavStatus = false,
-        this.step = 'android'
-      },
-
-      appleTabF(){
-        this.androidNavStatus = false,
-        this.appleNavStatus = true,
-        this.step = 'apple'
-      },
-
-      androidDownloadF(){
-        swal("Android版下载将在几秒钟内开始.")
-      },
-
-      appleDownloadF(){
-        swal("Apple版本下载将在几秒钟内开始.")
-      }
+    appleTabF(){
+      this.androidNavStatus = false,
+      this.appleNavStatus = true,
+      this.step = 'apple'
     },
 
-  }
+    androidDownloadF(){
+      swal("Android版下载将在几秒钟内开始.")
+    },
+
+    appleDownloadF(){
+      swal("Apple版本下载将在几秒钟内开始.")
+    }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .download-main-container{
   width: 100%;
   height: 100%;
@@ -245,7 +234,6 @@ export default {
   }
 
   .download-logo{
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -307,7 +295,6 @@ export default {
     width: 90%;
   }
 }
-
 </style>
 
 <style scoped>

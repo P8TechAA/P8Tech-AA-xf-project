@@ -13,13 +13,14 @@
           </div>
 
           <div class="mine-avatar-joining-date">
-            {{personalCenterInfo.loginJoiningDate}}
+            您已经加入&nbsp;{{personalCenterInfo.loginJoiningDate}}
           </div>
 
           <div class="mine-avatar-progress-bar-container">
             <div class="mine-progress-bar-inner">
               <div class="mine-progress-bar-indicator" :style="{width:personalCenterInfo.percentage+'%'}"></div>
             </div>
+            
             <span>{{personalCenterInfo.loginStatus}}</span>
           </div>
 
@@ -114,7 +115,6 @@
         </div>
       </div>
 
-
       <div class="mine-my-function-menu-layer">
         <div class="mine-my-function-menu-inner">
           <img src="../../assets/images/mine/mine-change-password.png" alt="" width="100%" height="100%">
@@ -132,7 +132,6 @@
         </div>
       </div>
 
-
       <div class="mine-my-function-menu-layer">
         <div class="mine-my-function-menu-inner">
           <img src="../../assets/images/mine/mine-system-notification.png" alt="" width="100%" height="100%">
@@ -146,12 +145,10 @@
         <span>退出登录</span>
     </div>
 
-
     <xf-footer :footerMine="footerMineActive"></xf-footer>
 
   </div>
 </template>
-
 
 <script>
 import Footer from '../../components/Footer.vue'
@@ -159,50 +156,50 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const personalCenterMock = Mock.mock({
-    userMock:{
-        id: "@id",
-        loginName: "@name",
-        loginJoiningDate: "您已经加入xxxx300天",
-        loginUserImg: '@image("60x60","#d6d6d6")',
-        loginRankImg: '@image("30x30","#d6d6d6")',
-        loginDescription: "@sentence(2)",
-        "percentage|1-100": 100,
-        loginStatus: "VIP1",
-        notLoginImg: '@image("30x30","#d6d6d6")',
-        notLoginDescription: "立即登录",
-      }
-   });
+  userMock:{
+    id: "@id",
+    loginName: "@name",
+    loginJoiningDate: "@date",
+    loginUserImg: '@image("60x60","#d6d6d6")',
+    loginRankImg: '@image("30x30","#d6d6d6")',
+    loginDescription: "@sentence(2)",
+    "percentage|1-100": 100,
+    loginStatus: "VIP1",
+    notLoginImg: '@image("30x30","#d6d6d6")',
+    notLoginDescription: "立即登录",
+  }
+});
 
 console.log(JSON.stringify(personalCenterMock, null, 4));
 
 export default {
   components:{
-      'xf-footer': Footer
+    'xf-footer': Footer
   },
 
   name: 'PersonalCenter',
 
-    data() {
-      return {
-        footerMineActive: true,
-        loginStatus: 'userLogin',
-        personalCenterInfo:{},
-      }
-    },
+  data() {
+    return {
+      footerMineActive: true,
+      loginStatus: 'userLogin',
+      personalCenterInfo:{},
+    }
+  },
 
-    created() {
-      this.personalCenterDataF()
-    },
+  created() {
+    this.personalCenterDataF()
+  },
 
-    methods: {
-      personalCenterDataF() {
-        this.personalCenterInfo=personalCenterMock.userMock
-      }
+  methods: {
+    personalCenterDataF() {
+      this.personalCenterInfo=personalCenterMock.userMock
     }
   }
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .mine-main-container{
   width: 100%;
   height: 100%;
@@ -571,9 +568,7 @@ export default {
       border-radius: 50vw;
     }
   }
-
 }
-
 </style>
 
 <style scoped>

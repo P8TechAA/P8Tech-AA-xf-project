@@ -8,7 +8,6 @@
     </div>
 
     <div class="account-information-scrollable-container">
-
       <div class="account-information-container">
 
         <div class="account-information-inner">
@@ -70,13 +69,10 @@
         <div class="account-information-submit-button" @click="submitAccountInformation()">
           <span>提交</span>
         </div>
-
       </div>
-
     </div>
 
     <xf-footer></xf-footer>
-
   </div>
 </template>
 
@@ -87,70 +83,59 @@ import Footer from '../../components/Footer.vue'
 var Mock = require('mockjs');
 const Random = Mock.Random;
 const accountInformationMock = Mock.mock({
-    userMock:{
-        id: "@id",
-        accountInfoURL: "@url",
-        accountInfoGender: "Male",
-        accountInfoName: "@name",
-        accountInfoBday: "@date",
-        accountInfoQq: "@word",
-        accountInfoWeChat: "@email",
-        accountInfoMailBox: "@email",
-        accountInfoPhone: "00000000",
-        accountInfoRegTime: "@time",
-        accountInfoPromoCode: "00000000",
-        accountInfoSponsoredLinks: "@url",
-      }
-   });
+  userMock:{
+    id: "@id",
+    accountInfoURL: "@url",
+    accountInfoGender: "Male",
+    accountInfoName: "@name",
+    accountInfoBday: "@date",
+    accountInfoQq: "@word",
+    accountInfoWeChat: "@email",
+    accountInfoMailBox: "@email",
+    accountInfoPhone: "00000000",
+    accountInfoRegTime: "@time",
+    accountInfoPromoCode: "00000000",
+    accountInfoSponsoredLinks: "@url",
+  }
+});
 
 console.log(JSON.stringify(accountInformationMock, null, 4));
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'AccountInformation',
-    data() {
-      return {
-        accountInfoItems:{},
-        accountNumber: '账号',
-        gender: '性别',
-        name: '姓名',
-        birthday: '生日',
-        qq: 'QQ',
-        wechat: '微信',
-        mailbox: '邮箱',
-        phone: '电话',
-        registrationTime: '注册时间',
-        exclusivePromotionalCode: '专属推广码',
-        sponsoredLinks: '推广链接',
-      }
+
+  data() {
+    return {
+      accountInfoItems:{},
+    }
+  },
+
+  created() {
+    this.accountInfoDataF()
+  },
+
+  methods: {
+    accountInfoDataF() {
+      this.accountInfoItems=accountInformationMock.userMock
     },
 
-    created() {
-      this.accountInfoDataF()
+    submitAccountInformation(){
+      swal("帐户信息已提交!")
     },
 
-    methods: {
-      accountInfoDataF() {
-        this.accountInfoItems=accountInformationMock.userMock
-      },
-
-      submitAccountInformation(){
-        swal("帐户信息已提交!")
-      },
-
-      verifyMailBox(){
-        swal("验证请求已发送!")
-      }
-    },
-
-  }
+    verifyMailBox(){
+      swal("验证请求已发送!")
+    }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .account-information-main-container{
   width: 100%;
   height: 100%;
@@ -164,6 +149,7 @@ export default {
     margin: 0vw auto 13vw;
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 3vw;
   }
 
   .account-information-exclusive-url{
@@ -228,6 +214,9 @@ export default {
   	font-stretch: normal;
   	letter-spacing: 0.3vw;
   	color: #758197;
+     overflow-x: auto;
+    overflow-y: hidden;  
+    white-space: nowrap;  
   }
 
   .mailbox-verification-button{
@@ -266,14 +255,11 @@ export default {
     }
   }
 }
-
 </style>
 
 <style scoped>
-
 body,html{
   width: 100%;
   height: 100%;
 }
-
 </style>

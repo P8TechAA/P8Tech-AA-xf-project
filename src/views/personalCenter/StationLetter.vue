@@ -9,21 +9,21 @@
 
           <el-collapse-item name="1">
             <template slot="title">
-                <img class="station-letter-header-images" src="../../assets/images/stationletter/inbox.png" alt="" width="100%" height="100%"><span class="station-letter-header-title">收件箱</span>
+              <img class="station-letter-header-images" src="../../assets/images/stationletter/inbox.png" alt="" width="100%" height="100%"><span class="station-letter-header-title">收件箱</span>
             </template>
             <div>收件箱-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="2">
             <template slot="title">
-                <img class="station-letter-header-images" src="../../assets/images/stationletter/outbox.png" alt="" width="auto" height="20vw"><span class="station-letter-header-title">发件箱</span>
+              <img class="station-letter-header-images" src="../../assets/images/stationletter/outbox.png" alt="" width="auto" height="20vw"><span class="station-letter-header-title">发件箱</span>
             </template>
             <div>发件箱-內容</div>
           </el-collapse-item>
 
           <el-collapse-item name="3">
             <template slot="title">
-                <img class="station-letter-header-images" src="../../assets/images/stationletter/writeAletter.png" alt="" width="auto" height="20vw"><span class="station-letter-header-title">写信</span>
+              <img class="station-letter-header-images" src="../../assets/images/stationletter/writeAletter.png" alt="" width="auto" height="20vw"><span class="station-letter-header-title">写信</span>
             </template>
             <div>写信-內容</div>
           </el-collapse-item>
@@ -43,32 +43,21 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'StationLetter',
-    data() {
-      return {
-        activeName: ''
-      }
-    },
 
-    computed: {
-
-    },
-
-    methods: {
-
-    },
-
-    mounted() {
-
+  data() {
+    return {
+      activeName: ''
     }
-  }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .station-letter-main-container{
   width: 100%;
   height: 100%;
@@ -100,7 +89,6 @@ export default {
     height: 5.5vw;
   }
 }
-
 </style>
 
 <style scoped>

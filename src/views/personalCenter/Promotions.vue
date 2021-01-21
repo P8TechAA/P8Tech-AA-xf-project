@@ -4,14 +4,12 @@
     <xf-game-header headerTitlePassed="优惠活动"></xf-game-header>
 
     <div class="promotions-tm-scrollable-container">
-      
-        <div v-for="i in promotionsItems" :key="i.id">
-            <div @click="promotionF" class="promotions-items-container">
-                <img :src="i.image" class="promotions-i-image"/>
-                <div class="promotions-i-name">{{i.name}}</div>
-            </div>
+      <div v-for="i in promotionsItems" :key="i.id">
+        <div @click="promotionF" class="promotions-items-container">
+          <img :src="i.image" class="promotions-i-image"/>
+          <div class="promotions-i-name">{{i.name}}</div>
         </div>
-  
+      </div>
     </div>
 
     <xf-footer></xf-footer>
@@ -24,49 +22,49 @@ import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 
 var Mock = require('mockjs');
-
 const promotionsMock = Mock.mock({
-    "array|6": [
-      {
-        "id|+1": 0,
-        "name": "转运金",
-        "image": require('../../assets/images/games/promotions-transfer-money-image.png'),
-      }
-    ],
-   });
+  "array|6": [
+    {
+      "id|+1": 0,
+      "name": "转运金",
+      "image": require('../../assets/images/games/promotions-transfer-money-image.png'),
+    }
+  ],
+});
 
 console.log(JSON.stringify(promotionsMock, null, 4));
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'PromotionsTransferMoney',
-    data() {
-      return {
-          promotionsItems:[],
-      }
+
+  data() {
+    return {
+      promotionsItems:[],
+    }
+  },
+
+  created() {
+    this.promotionsDataF()
+  },
+
+  methods: {
+    promotionF(){
+      swal("促销点击.")
     },
 
-    created() {
-      this.promotionsDataF()
-    },
-
-    methods: {
-      promotionF(){
-        swal("促销点击.")
-      },
-
-      promotionsDataF() {
-        this.promotionsItems=promotionsMock.array
-      }
-    },
+    promotionsDataF() {
+      this.promotionsItems=promotionsMock.array
+    }
   }
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .promotions-tm-main-container{
   width: 100%;
   height: 100%;
@@ -116,14 +114,11 @@ export default {
     white-space: nowrap;  
   }
 }
-
 </style>
 
 <style scoped>
-
-    html,body{
-      height: 100%;
-      width: 100%;
-    }
-
+  html,body{
+    height: 100%;
+    width: 100%;
+  }
 </style>

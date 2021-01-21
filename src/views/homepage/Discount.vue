@@ -15,129 +15,125 @@
     </div>
 
     <div class="promotion-scrollable-container">
-       
-        <div v-for="i in firstDepositItems" :key="i.id" class="position-card-main-container">
-           <div v-if="isActive('firstDeposit') || isActive('all')" class="promotion-card-container">
-            
-            <div class="promo-inner-top">
-              <div class="promo-inner-top-left">
-                <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
-              </div>
-              <div class="promo-inner-top-right">
-                <span>{{i.viewDetails}}</span>
-              </div>
+      <div v-for="i in firstDepositItems" :key="i.id" class="position-card-main-container">
+        <div v-if="isActive('firstDeposit') || isActive('all')" class="promotion-card-container">
+        
+          <div class="promo-inner-top">
+            <div class="promo-inner-top-left">
+              <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
             </div>
-
-            <div class="promo-orange-tag">
-              <span>{{i.status}}</span>
+            <div class="promo-inner-top-right">
+              <span>{{i.viewDetails}}</span>
             </div>
-
-            <div class="promo-main-img">
-              <img :src="i.discountCard" alt="" width="100%" height="100%">
-            </div>
-          
           </div>
-        </div>
 
-        <div v-for="i in physicalEducationItems" :key="i.id" class="position-card-main-container">
-           <div v-if="isActive('physicalEducation') || isActive('all')" class="promotion-card-container">
-            
-            <div class="promo-inner-top">
-              <div class="promo-inner-top-left">
-                <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
-              </div>
-              <div class="promo-inner-top-right">
-                <span>{{i.viewDetails}}</span>
-              </div>
-            </div>
-
-            <div class="promo-orange-tag">
-              <span>{{i.status}}</span>
-            </div>
-
-            <div class="promo-main-img">
-              <img :src="i.discountCard" alt="" width="100%" height="100%">
-            </div>
-          
+          <div class="promo-orange-tag">
+            <span>{{i.status}}</span>
           </div>
-        </div>
 
-        <div v-for="i in realPeopleItems" :key="i.id" class="position-card-main-container">
-           <div v-if="isActive('realPeople') || isActive('all')" class="promotion-card-container">
-            
-            <div class="promo-inner-top">
-              <div class="promo-inner-top-left">
-                <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
-              </div>
-              <div class="promo-inner-top-right">
-                <span>{{i.viewDetails}}</span>
-              </div>
-            </div>
-
-            <div class="promo-orange-tag">
-              <span>{{i.status}}</span>
-            </div>
-
-            <div class="promo-main-img">
-              <img :src="i.discountCard" alt="" width="100%" height="100%">
-            </div>
-          
+          <div class="promo-main-img">
+            <img :src="i.discountCard" alt="" width="100%" height="100%">
           </div>
+
         </div>
+      </div>
 
-        <div v-for="i in backWaterItems" :key="i.id" class="position-card-main-container">
-           <div v-if="isActive('backWater') || isActive('all')" class="promotion-card-container">
-            
-            <div class="promo-inner-top">
-              <div class="promo-inner-top-left">
-                <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
-              </div>
-              <div class="promo-inner-top-right">
-                <span>{{i.viewDetails}}</span>
-              </div>
-            </div>
-
-            <div class="promo-orange-tag">
-              <span>{{i.status}}</span>
-            </div>
-
-            <div class="promo-main-img">
-              <img :src="i.discountCard" alt="" width="100%" height="100%">
-            </div>
+      <div v-for="i in physicalEducationItems" :key="i.id" class="position-card-main-container">
+        <div v-if="isActive('physicalEducation') || isActive('all')" class="promotion-card-container">
           
+          <div class="promo-inner-top">
+            <div class="promo-inner-top-left">
+              <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
+            </div>
+            <div class="promo-inner-top-right">
+              <span>{{i.viewDetails}}</span>
+            </div>
           </div>
+
+          <div class="promo-orange-tag">
+            <span>{{i.status}}</span>
+          </div>
+
+          <div class="promo-main-img">
+            <img :src="i.discountCard" alt="" width="100%" height="100%">
+          </div>
+        
         </div>
+      </div>
 
-        <div v-for="i in haoliItems" :key="i.id" class="position-card-main-container">
-           <div v-if="isActive('haoli') || isActive('all')" class="promotion-card-container">
-            
-            <div class="promo-inner-top">
-              <div class="promo-inner-top-left">
-                <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
-              </div>
-              <div class="promo-inner-top-right">
-                <span>{{i.viewDetails}}</span>
-              </div>
-            </div>
-
-            <div class="promo-orange-tag">
-              <span>{{i.status}}</span>
-            </div>
-
-            <div class="promo-main-img">
-              <img :src="i.discountCard" alt="" width="100%" height="100%">
-            </div>
+      <div v-for="i in realPeopleItems" :key="i.id" class="position-card-main-container">
+        <div v-if="isActive('realPeople') || isActive('all')" class="promotion-card-container">
           
+          <div class="promo-inner-top">
+            <div class="promo-inner-top-left">
+              <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
+            </div>
+            <div class="promo-inner-top-right">
+              <span>{{i.viewDetails}}</span>
+            </div>
           </div>
+
+          <div class="promo-orange-tag">
+            <span>{{i.status}}</span>
+          </div>
+
+          <div class="promo-main-img">
+            <img :src="i.discountCard" alt="" width="100%" height="100%">
+          </div>
+        
         </div>
-       
+      </div>
+
+      <div v-for="i in backWaterItems" :key="i.id" class="position-card-main-container">
+        <div v-if="isActive('backWater') || isActive('all')" class="promotion-card-container">
+          
+          <div class="promo-inner-top">
+            <div class="promo-inner-top-left">
+              <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
+            </div>
+            <div class="promo-inner-top-right">
+              <span>{{i.viewDetails}}</span>
+            </div>
+          </div>
+
+          <div class="promo-orange-tag">
+            <span>{{i.status}}</span>
+          </div>
+
+          <div class="promo-main-img">
+            <img :src="i.discountCard" alt="" width="100%" height="100%">
+          </div>
+        
+        </div>
+      </div>
+
+      <div v-for="i in haoliItems" :key="i.id" class="position-card-main-container">
+        <div v-if="isActive('haoli') || isActive('all')" class="promotion-card-container">
+        
+          <div class="promo-inner-top">
+            <div class="promo-inner-top-left">
+              <span>{{i.startDate}}</span><span>至</span><span>{{i.endDate}}</span>
+            </div>
+            <div class="promo-inner-top-right">
+              <span>{{i.viewDetails}}</span>
+            </div>
+          </div>
+
+          <div class="promo-orange-tag">
+            <span>{{i.status}}</span>
+          </div>
+
+          <div class="promo-main-img">
+            <img :src="i.discountCard" alt="" width="100%" height="100%">
+          </div>
+      
+      </div>
+      </div>
     </div>
 
     <xf-footer :footerPromotion="footerPromotionActive"></xf-footer>
-
   </div>
 </template>
-
 
 <script>
 import Header from '../../components/Header.vue'
@@ -147,108 +143,111 @@ var Mock = require('mockjs');
 const Random = Mock.Random;
 
 const discountMock = Mock.mock({
-    "firstDeposit|2-10": [
-      {
-        id: '@id',
-        startDate: "@date('yyyy-MM-dd')",
-        endDate: "@date('yyyy-MM-dd')",
-        viewDetails: "查看详情>>",
-        status: "最新活动",
-        discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
-      }
-    ],
-    "physicalEducation|2-10": [
-      {
-        id: '@id',
-        startDate: "@date('yyyy-MM-dd')",
-        endDate: "@date('yyyy-MM-dd')",
-        viewDetails: "查看详情>>",
-        status: "最新活动",
-        discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
-      }
-    ],
-    "realPeople|2-10": [
-      {
-        id: '@id',
-        startDate: "@date('yyyy-MM-dd')",
-        endDate: "@date('yyyy-MM-dd')",
-        viewDetails: "查看详情>>",
-        status: "最新活动",
-        discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
-      }
-    ],
-    "backWater|2-10": [
-      {
-        id: '@id',
-        startDate: "@date('yyyy-MM-dd')",
-        endDate: "@date('yyyy-MM-dd')",
-        viewDetails: "查看详情>>",
-        status: "最新活动",
-        discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
-      }
-    ],
-    "haoli|2-10": [
-      {
-        id: '@id',
-        startDate: "@date('yyyy-MM-dd')",
-        endDate: "@date('yyyy-MM-dd')",
-        viewDetails: "查看详情>>",
-        status: "最新活动",
-        discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
-      }
-    ],
-   });
+  "firstDeposit|2-10": [
+    {
+      id: '@id',
+      startDate: "@date('yyyy-MM-dd')",
+      endDate: "@date('yyyy-MM-dd')",
+      viewDetails: "查看详情>>",
+      status: "最新活动",
+      discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
+    }
+  ],
+
+  "physicalEducation|2-10": [
+    {
+      id: '@id',
+      startDate: "@date('yyyy-MM-dd')",
+      endDate: "@date('yyyy-MM-dd')",
+      viewDetails: "查看详情>>",
+      status: "最新活动",
+      discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
+    }
+  ],
+
+  "realPeople|2-10": [
+    {
+      id: '@id',
+      startDate: "@date('yyyy-MM-dd')",
+      endDate: "@date('yyyy-MM-dd')",
+      viewDetails: "查看详情>>",
+      status: "最新活动",
+      discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
+    }
+  ],
+
+  "backWater|2-10": [
+    {
+      id: '@id',
+      startDate: "@date('yyyy-MM-dd')",
+      endDate: "@date('yyyy-MM-dd')",
+      viewDetails: "查看详情>>",
+      status: "最新活动",
+      discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
+    }
+  ],
+
+  "haoli|2-10": [
+    {
+      id: '@id',
+      startDate: "@date('yyyy-MM-dd')",
+      endDate: "@date('yyyy-MM-dd')",
+      viewDetails: "查看详情>>",
+      status: "最新活动",
+      discountCard:"@image('200x50', '#FFFFFF', 'Discount Cards')"
+    }
+  ],
+});
 
 console.log(JSON.stringify(discountMock, null, 4));
 
 export default {
-    components:{
-        'xf-footer': Footer,
-        'xf-game-header': Header
+  components:{
+    'xf-footer': Footer,
+    'xf-game-header': Header
+  },
+
+  name: 'Discount',
+
+  data() {
+    return {
+      activeItem: 'all',
+
+      footerPromotionActive: true,
+
+      firstDepositItems:[],
+      physicalEducationItems:[],
+      realPeopleItems:[],
+      backWaterItems:[],
+      haoliItems:[],
+    }
+  },
+
+  created() {
+    this.DiscountDataF()
+  },
+
+  methods: {
+    isActive(menuItem) {
+      return this.activeItem === menuItem
     },
 
-    name: 'Discount',
-    data() {
-      return {
-        activeItem: 'all',
-
-        footerPromotionActive: true,
-
-         firstDepositItems:[],
-         physicalEducationItems:[],
-         realPeopleItems:[],
-         backWaterItems:[],
-         haoliItems:[],
-      }
+    setActive(menuItem) {
+      this.activeItem = menuItem
     },
 
-    created() {
-      this.DiscountDataF()
-    },
-
-    methods: {
-
-      isActive(menuItem) {
-        return this.activeItem === menuItem
-      },
-
-      setActive(menuItem) {
-        this.activeItem = menuItem
-      },
-
-      DiscountDataF() {
-        this.firstDepositItems=discountMock.firstDeposit
-        this.physicalEducationItems=discountMock.physicalEducation
-        this.realPeopleItems=discountMock.realPeople
-        this.backWaterItems=discountMock.backWater
-        this.haoliItems=discountMock.haoli
-      },
-    } 
-  }
+    DiscountDataF() {
+      this.firstDepositItems=discountMock.firstDeposit
+      this.physicalEducationItems=discountMock.physicalEducation
+      this.realPeopleItems=discountMock.realPeople
+      this.backWaterItems=discountMock.backWater
+      this.haoliItems=discountMock.haoli
+    }
+  } 
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-
 .promotion-main-container{
   width: 100%;
   height: 100%;
@@ -296,8 +295,8 @@ export default {
   }
 
   .promoActiveNav{
-      color: #33bcd4 !important;
-      border-bottom: 0.5vw solid #33bcd4 !important;
+    color: #33bcd4 !important;
+    border-bottom: 0.5vw solid #33bcd4 !important;
   }
 
   .promotion-scrollable-container{
@@ -377,23 +376,23 @@ export default {
   }
 
   .promo-orange-tag{
-      position: absolute;
-      bottom: 5vw;
-      left: 0.5vw;
-      width: 13vw;
-      height: 5vw;
-      background-image: linear-gradient(90deg, 
-        #ff4e00 0%, 
-        #db1500 100%), 
-      linear-gradient(
-        #260600, 
-        #260600);
-      background-blend-mode: normal, 
-        normal;
-      border-radius: 0vw 3vw 3vw 0vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    position: absolute;
+    bottom: 5vw;
+    left: 0.5vw;
+    width: 13vw;
+    height: 5vw;
+    background-image: linear-gradient(90deg, 
+      #ff4e00 0%, 
+      #db1500 100%), 
+    linear-gradient(
+      #260600, 
+      #260600);
+    background-blend-mode: normal, 
+      normal;
+    border-radius: 0vw 3vw 3vw 0vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     span{
       font-family: "MicrosoftYaHei";
@@ -409,7 +408,6 @@ export default {
     display: none;
   }
 }
-
 </style>
 
 <style scoped>

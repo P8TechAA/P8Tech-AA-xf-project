@@ -4,7 +4,6 @@
     <xf-game-header headerTitlePassed="找回密码"></xf-game-header>
 
     <div class="recover-password-scrollable-container">
-
       <div class="recover-password-tabs">
         <div class="email-retrieval" :class="{activeRetrievalTabs:emailRetrievalStatus}" @click="emailVerification()">
           <span>邮箱找回</span>
@@ -16,7 +15,6 @@
       </div>
 
       <section v-if="step == 'email'">
-
         <div class="recover-password-provide-username">
           <span>请提供您的用户名XXXXXXXXXXXXXX</span>
         </div>
@@ -49,16 +47,15 @@
             </div>
           </el-form>
         </div>
-
       </section>
 
       <section v-if="step == 'sms'">
-
+        <!-- section for sms -->
       </section>
     </div>
 
     <xf-footer></xf-footer>
-
+  
   </div>
 </template>
 
@@ -68,88 +65,78 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'RecoverPassword',
-    data() {
 
-      var emailValidator = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('電子郵件為必填項.'));
-        } else if (value !== this.registeredEmail) {
-          callback(new Error("電子郵件與任何註冊的電子郵件都不匹配."));
-        } else {
-          callback();
-        }
-      };
-
-      return {
-        emailRetrievalStatus: true,
-        smsRetrievalStatus: false,
-
-        recoverPasswordForm: {
-          username: '',
-          email: ''
-        },
-
-        recoverPasswordRules: {
-          username: [
-            { required: true, trigger: 'blur', message: '用戶名為必填項.' },
-            { min: 6, max: 10, trigger: 'blur', message: '用戶名必須是6-12個字符.' },
-          ],
-
-          email: [
-              { validator: emailValidator, trigger: 'blur' }
-          ],
-        },
-
-        // This is sample registered email
-        registeredEmail: 'registeredEmail@gmail.com',
-        step: 'email',
+  data() {
+    var emailValidator = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('電子郵件為必填項.'));
+      } else if (value !== this.registeredEmail) {
+        callback(new Error("電子郵件與任何註冊的電子郵件都不匹配."));
+      } else {
+        callback();
       }
-    },
+    };
 
-    computed: {
+    return {
+      emailRetrievalStatus: true,
+      smsRetrievalStatus: false,
 
-    },
-
-    methods: {
-
-      emailVerification(){
-        this.emailRetrievalStatus = true,
-        this.smsRetrievalStatus = false,
-        this.step = 'email'
+      recoverPasswordForm: {
+        username: '',
+        email: ''
       },
 
-      smsVerification(){
-        this.emailRetrievalStatus = false,
-        this.smsRetrievalStatus = true,
-        this.step = 'sms'
+      recoverPasswordRules: {
+        username: [
+          { required: true, trigger: 'blur', message: '用戶名為必填項.' },
+          { min: 6, max: 10, trigger: 'blur', message: '用戶名必須是6-12個字符.' },
+        ],
+
+        email: [
+            { validator: emailValidator, trigger: 'blur' }
+        ],
       },
 
-      submitRecoverPassword(){
-        this.$refs.recoverPasswordForm.validate((valid) => {
-          if (valid) {
-            swal("密碼恢復請求已提交");
-            this.$router.push({ path: this.redirect || '/homepage' })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      }
-
-    },
-
-    mounted() {
-
+      // This is sample registered email
+      registeredEmail: 'registeredEmail@gmail.com',
+      step: 'email',
     }
-  }
-</script>
-<style rel="stylesheet/scss" lang="scss" scoped>
+  },
 
+  methods: {
+    emailVerification(){
+      this.emailRetrievalStatus = true,
+      this.smsRetrievalStatus = false,
+      this.step = 'email'
+    },
+
+    smsVerification(){
+      this.emailRetrievalStatus = false,
+      this.smsRetrievalStatus = true,
+      this.step = 'sms'
+    },
+
+    submitRecoverPassword(){
+      this.$refs.recoverPasswordForm.validate((valid) => {
+        if (valid) {
+          swal("密碼恢復請求已提交");
+          this.$router.push({ path: this.redirect || '/homepage' })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    }
+  },
+}
+</script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
 .recover-password-main-container{
   width: 100%;
   height: 100%;
@@ -216,17 +203,16 @@ export default {
 
   .activeRetrievalTabs{
     background-color: #33bcd4;
-	   border-radius: 0.5vw;
+    border-radius: 0.5vw;
 
-     span{
-       color: #ffffff;
-     }
+    span{
+      color: #ffffff;
+    }
   }
 
   .recover-password-provide-username{
     width: 100%;
     height: 12vw;
-    // background-color: orange;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -271,7 +257,6 @@ export default {
     }
   }
 }
-
 </style>
 
 <style scoped>

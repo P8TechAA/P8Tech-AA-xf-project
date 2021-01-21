@@ -46,32 +46,21 @@ import Footer from '../../components/Footer.vue'
 
 export default {
   components:{
-      'xf-game-header': Header,
-      'xf-footer': Footer
+    'xf-game-header': Header,
+    'xf-footer': Footer
   },
 
   name: 'SystemNotification',
-    data() {
-      return {
-        activeName: ''
-      }
-    },
 
-    computed: {
-
-    },
-
-    methods: {
-
-    },
-
-    mounted() {
-
+  data() {
+    return {
+      activeName: ''
     }
-  }
+  },
+}
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
 
+<style rel="stylesheet/scss" lang="scss" scoped>
 .system-notification-main-container{
   width: 100%;
   height: 100%;
@@ -94,7 +83,6 @@ export default {
     width: 93vw;
   }
 }
-
 </style>
 
 <style scoped>
