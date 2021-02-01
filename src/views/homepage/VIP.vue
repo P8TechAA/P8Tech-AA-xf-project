@@ -2,6 +2,8 @@
   <div class="vip-main-container">
 
     <div class="vip-scrollable-container">
+      
+      <section v-if="step == 'vip1'">
       <div class="vip-top-container">
         <div class="vip-top-top">
           <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
@@ -54,7 +56,7 @@
         </div>
       </div>
 
-      <section v-if="step == 'vip1'">
+      
         <div class="vip-privileges">
           <div class="vip-privileges-mark"></div>
           <span>VIP特权</span>
@@ -154,6 +156,52 @@
           </div>
         </div>
       </section>
+
+      <!-- Start of Section 2 -->
+
+      <section v-if="step == 'vip2'" class="section2-container">
+      <div class="vip-top-container">
+        <div class="vip-top-top">
+          <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
+          <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+        </div>
+      </div>
+
+      <div class="vip-details-tb-container">
+        <table class="customers">
+  <tr>
+    <th>等级</th>
+    <th>升级要求</th>
+    <th>保级要求</th>
+    <th>生日礼金</th>
+    <th>每日红包</th>
+    <th>日提款额度</th>
+  </tr>
+
+      
+        <tr v-for="i in vip2Items" :key="i.id">
+          <td>{{i.grade}}</td>
+          <td>{{i.upgradeRequirements}}</td>
+          <td>{{i.relagationRequirements}}</td>
+          <td>{{i.birthdayGiftGold}}</td>
+          <td>{{i.dailyRedPackage}}</td>
+          <td>{{i.dailyWithdrawalQuota}}</td>
+        </tr>
+     
+
+  
+  
+</table>
+      </div>
+        
+      
+        
+       
+      </section>
+
+
+
+
     </div>
  </div>
 </template>
@@ -189,7 +237,19 @@ const vipMock = Mock.mock({
     "electronicRebate|1-100.2": 100,
     "fishingRebate|1-100.2": 100,
     "chessRebate|1-100.2": 100,
+    },
+
+    "vip2details|10": [
+    {
+      id: '@id',
+      grade: "@word",
+      upgradeRequirements: "@word",
+      relagationRequirements: "@word",
+      birthdayGiftGold: "@word",
+      dailyRedPackage: "@word",
+      dailyWithdrawalQuota: "@word",
     }
+  ],
 });
 
 console.log(JSON.stringify(vipMock, null, 4));
@@ -204,6 +264,7 @@ export default {
   data() {
     return {
       vipMockItems:{},
+      vip2Items:[],
 
       vipPrivilegesStatus: true,
       vipDetailsStatus: false,
@@ -231,6 +292,7 @@ export default {
   methods: {
     vipMockF() {
       this.vipMockItems=vipMock.vipMock
+      this.vip2Items=vipMock.vip2details
     },
 
     privilegesTab(){
@@ -253,16 +315,13 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .vip-scrollable-container{
-    position: absolute;
-    top: 0;
-    bottom: 0;
+    position: relative;
     background-color: #131724;
     width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    padding-bottom: 15vw;
   }
 
   .vip-top-container{
@@ -560,6 +619,50 @@ export default {
     align-items: center;
     margin: 0vw 7vw 7vw;
   }
+
+
+  .section2-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+  .vip-details-tb-container{
+    position: relative;
+    width: 94%;
+    height: 100%;
+    margin: 0 auto;
+    // background-color: green;
+    margin-top: 3vw;
+  }
+
+
+
+ .customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 3vw;
+  text-align: center;
+  background-color: #212534;
+  
+}
+
+.customers td{
+  border: 0.01vw solid #eee;
+  color: #bacef1;
+  padding: 2vw 0vw;
+}
+
+.customers th {
+  background-color: #33bcd4;
+  color: white;
+  text-align: center;
+  padding: 2vw;
+}
+
+
+
 }
 </style>
 
