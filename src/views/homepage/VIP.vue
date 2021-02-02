@@ -1,61 +1,59 @@
 <template>
   <div class="vip-main-container">
-
     <div class="vip-scrollable-container">
       
       <section v-if="step == 'vip1'">
-      <div class="vip-top-container">
-        <div class="vip-top-top">
-          <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
-          <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
-        </div>
+        <div class="vip-top-container">
+          <div class="vip-top-top">
+            <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
+            <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+          </div>
 
-        <swiper class="swiper" :options="swiperOption">
-          <swiper-slide>
-            <img :src="vipMockItems.vipImageLeft" alt="" width="100%" height="100%">
-            <div class="vip-card-text">
-              <span class="vip-text-top">{{vipMockItems.vipLeftTextOne}}</span>
-              <span class="vip-text-mid">{{vipMockItems.vipLeftTextTwo}}</span>
-              <span class="vip-text-bottom">{{vipMockItems.vipLeftButton}}</span>
+          <swiper class="swiper" :options="swiperOption">
+            <swiper-slide>
+              <img :src="vipMockItems.vipImageLeft" alt="" width="100%" height="100%">
+              <div class="vip-card-text">
+                <span class="vip-text-top">{{vipMockItems.vipLeftTextOne}}</span>
+                <span class="vip-text-mid">{{vipMockItems.vipLeftTextTwo}}</span>
+                <span class="vip-text-bottom">{{vipMockItems.vipLeftButton}}</span>
+              </div>
+            </swiper-slide>
+
+            <swiper-slide class="vip-swiper-image">
+              <img :src="vipMockItems.vipImageRight" alt="" width="100%" height="100%">
+              <div class="vip-card-text">
+                <span class="vip-text-top">{{vipMockItems.vipRighttTextOne}}</span>
+                <span class="vip-text-mid">{{vipMockItems.vipRightTextTwo}}</span>
+                <span class="vip-text-bottom">{{vipMockItems.vipRightButton}}</span>
+              </div>
+            </swiper-slide>
+
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
+
+          <div class="progress-bar-percentage">
+            {{vipMockItems.balance}}%
+          </div>
+
+          <div class="progress-bar-bar">
+            <div class="progress-label-vip1">
+              VIP{{vipMockItems.vipPrevLevel}}
             </div>
-          </swiper-slide>
 
-          <swiper-slide class="vip-swiper-image">
-            <img :src="vipMockItems.vipImageRight" alt="" width="100%" height="100%">
-            <div class="vip-card-text">
-              <span class="vip-text-top">{{vipMockItems.vipRighttTextOne}}</span>
-              <span class="vip-text-mid">{{vipMockItems.vipRightTextTwo}}</span>
-              <span class="vip-text-bottom">{{vipMockItems.vipRightButton}}</span>
+            <div class="progress-percentage-container">
+              <div class="progress-bar-progress-indicator" :style="{width:vipMockItems.balance+'%'}"></div>
             </div>
-          </swiper-slide>
 
-          <div class="swiper-button-prev" slot="button-prev"></div>
-          <div class="swiper-button-next" slot="button-next"></div>
-        </swiper>
-
-        <div class="progress-bar-percentage">
-          {{vipMockItems.balance}}%
-        </div>
-
-        <div class="progress-bar-bar">
-          <div class="progress-label-vip1">
-            VIP{{vipMockItems.vipPrevLevel}}
+            <div class="progress-label-vip2">
+              VIP{{vipMockItems.vipNextLevel}}
+            </div>
           </div>
 
-          <div class="progress-percentage-container">
-            <div class="progress-bar-progress-indicator" :style="{width:vipMockItems.balance+'%'}"></div>
-          </div>
-
-          <div class="progress-label-vip2">
-            VIP{{vipMockItems.vipNextLevel}}
+          <div class="progress-description">
+              您已完成&nbsp;{{vipMockItems.deposit}}&nbsp;存款和&nbsp;{{vipMockItems.turnover}}&nbsp;流水
           </div>
         </div>
-
-        <div class="progress-description">
-            您已完成&nbsp;{{vipMockItems.deposit}}&nbsp;存款和&nbsp;{{vipMockItems.turnover}}&nbsp;流水
-        </div>
-      </div>
-
       
         <div class="vip-privileges">
           <div class="vip-privileges-mark"></div>
@@ -160,48 +158,35 @@
       <!-- Start of Section 2 -->
 
       <section v-if="step == 'vip2'" class="section2-container">
-      <div class="vip-top-container">
-        <div class="vip-top-top">
-          <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
-          <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+        <div class="vip-top-container">
+          <div class="vip-top-top">
+            <span :class="{vipNavigationActive:vipPrivilegesStatus}" @click="privilegesTab">VIP特权</span>
+            <span :class="{vipNavigationActive:vipDetailsStatus}" @click="detailsTab">VIP详情</span>
+          </div>
         </div>
-      </div>
 
-      <div class="vip-details-tb-container">
-        <table class="customers">
-  <tr>
-    <th>等级</th>
-    <th>升级要求</th>
-    <th>保级要求</th>
-    <th>生日礼金</th>
-    <th>每日红包</th>
-    <th>日提款额度</th>
-  </tr>
-
-      
-        <tr v-for="i in vip2Items" :key="i.id">
-          <td>{{i.grade}}</td>
-          <td>{{i.upgradeRequirements}}</td>
-          <td>{{i.relagationRequirements}}</td>
-          <td>{{i.birthdayGiftGold}}</td>
-          <td>{{i.dailyRedPackage}}</td>
-          <td>{{i.dailyWithdrawalQuota}}</td>
-        </tr>
-     
-
-  
-  
-</table>
-      </div>
+        <div class="vip-details-tb-container">
+          <table class="vip-detail-table">
+            <tr>
+              <th class="grade-width">等级</th>
+              <th class="upgradeRequirements-width">升级要求</th>
+              <th class="relegationRequirements-width">保级要求</th>
+              <th class="birthdayGift-width">生日礼金</th>
+              <th class="dailyRedEnvelop-width">每日红包</th>
+              <th class="dailyWithdrawalLimit-width">日提款额度</th>
+            </tr>
         
-      
-        
-       
+            <tr v-for="i in vip2Items" :key="i.id">
+              <td class="grade-width">VIP {{i.vipId}}</td>
+              <td class="upgradeRequirements-width">{{i.upgradeRequirements}}&#60;累积存款</td>
+              <td class="relegationRequirements-width">{{i.relagationRequirements}}&#60;一个月内累积存款</td>
+              <td class="birthdayGift-width">{{i.birthdayGiftGold}} 元</td>
+              <td class="dailyRedEnvelop-width">{{i.dailyRedPackage}} 元</td>
+              <td class="dailyWithdrawalLimit-width">{{i.dailyWithdrawalQuota}} 万</td>
+            </tr>
+          </table>
+        </div>
       </section>
-
-
-
-
     </div>
  </div>
 </template>
@@ -240,16 +225,16 @@ const vipMock = Mock.mock({
     },
 
     "vip2details|10": [
-    {
-      id: '@id',
-      grade: "@word",
-      upgradeRequirements: "@word",
-      relagationRequirements: "@word",
-      birthdayGiftGold: "@word",
-      dailyRedPackage: "@word",
-      dailyWithdrawalQuota: "@word",
-    }
-  ],
+      {
+        id: '@id',
+        "vipId|+1": 1,
+        upgradeRequirements: "@integer(0,1000)",
+        relagationRequirements: "@integer(0,1000)",
+        birthdayGiftGold: "@integer(0,100)",
+        dailyRedPackage: "@integer(0,100)",
+        dailyWithdrawalQuota: "@integer(0,100)",
+      }
+    ],
 });
 
 console.log(JSON.stringify(vipMock, null, 4));
@@ -620,49 +605,76 @@ export default {
     margin: 0vw 7vw 7vw;
   }
 
-
   .section2-container{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 
   .vip-details-tb-container{
     position: relative;
     width: 94%;
     height: 100%;
-    margin: 0 auto;
-    // background-color: green;
-    margin-top: 3vw;
+    margin: 3vw auto;
   }
 
+  .vip-detail-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "MicrosoftYaHei";
+    text-align: center;
+    background-color: #212534;
+    line-height: 5vw;
+  }
 
+  .vip-detail-table td{
+    border: 0.01vw solid #ccc;
+    color: #bacef1;
+    padding: 1vw 1vw;
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+  }
 
- .customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 3vw;
-  text-align: center;
-  background-color: #212534;
-  
-}
+  .vip-detail-table th {
+    background-color: #33bcd4;
+    color: white;
+    padding: 1vw 0.5vw;
+    font-size: 3vw;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0.5vw;
+  }
 
-.customers td{
-  border: 0.01vw solid #eee;
-  color: #bacef1;
-  padding: 2vw 0vw;
-}
+  .grade-width{
+    width: 11%;
+    word-break: break-all;
+  }
 
-.customers th {
-  background-color: #33bcd4;
-  color: white;
-  text-align: center;
-  padding: 2vw;
-}
+  .upgradeRequirements-width{
+    width: 20%;
+    word-break: break-all;
+  }
 
+  .relegationRequirements-width{
+    width: 25%;
+    word-break: break-all;
+  }
 
+  .birthdayGift-width{
+    width: 11%;
+    word-break: break-all;
+  }
 
+  .dailyRedEnvelop-width{
+    width: 11%;
+    word-break: break-all;
+  }
+
+  .dailyWithdrawalLimit-width{
+    width: 11%;
+    word-break: break-all;
+  }
 }
 </style>
 
